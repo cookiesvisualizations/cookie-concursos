@@ -1,0 +1,745 @@
+<title>Cookie Concursos</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: cabeçalho de boletim, filtros, e fichas com marcação pessoal e carimbo só nos que valem a pena, nos pouco atrativos e nos temporários */
+:root{
+  --bg:#F5F1FA; --surface:#FFFFFF; --ink:#271B33; --muted:#6C5E7B; --line:#DFD3EC;
+  --accent:#7A3FC4; --accent-soft:#EBE0F9;
+  --good:#1D7A4C; --good-soft:#DFF2E7; --warn:#A35F00; --warn-soft:#FBEED7;
+  --bad:#B3261E; --bad-soft:#F9E1DF; --neutral-soft:#EFE8F6; --new:#B5257F; --new-soft:#FAE0EF;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1A1322; --surface:#241A2E; --ink:#EEE6F6; --muted:#B0A0C2; --line:#3A2C49;
+  --accent:#C09CF0; --accent-soft:#2F2140;
+  --good:#5FCB93; --good-soft:#15342A; --warn:#F0B35A; --warn-soft:#3A2C14;
+  --bad:#FF8C82; --bad-soft:#3E1D1B; --neutral-soft:#2A2036; --new:#F07BC0; --new-soft:#3A2035; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1A1322; --surface:#241A2E; --ink:#EEE6F6; --muted:#B0A0C2; --line:#3A2C49;
+  --accent:#C09CF0; --accent-soft:#2F2140;
+  --good:#5FCB93; --good-soft:#15342A; --warn:#F0B35A; --warn-soft:#3A2C14;
+  --bad:#FF8C82; --bad-soft:#3E1D1B; --neutral-soft:#2A2036; --new:#F07BC0; --new-soft:#3A2035; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5}
+.wrap{max-width:1040px;margin:0 auto;padding-block:28px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:20px}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:12px;border-bottom:2px solid var(--ink);padding-bottom:14px}
+.brand{display:flex;align-items:center;gap:14px;min-width:0}
+.logo{width:58px;height:58px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--ink);background:var(--surface)}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(28px,5vw,40px);line-height:1.05;margin:0;letter-spacing:-.01em}
+.meta{font-family:var(--f-mono);font-size:12.5px;color:var(--muted);text-align:right}
+.meta b{color:var(--ink);font-weight:500}
+.perfilbar{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;background:var(--accent-soft);border-radius:10px;padding:12px 16px}
+.perfilbar label{font-weight:700}
+.perfilbar form{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.perfilbar small{color:var(--muted);flex-basis:100%}
+.btn{font:inherit;font-size:14px;font-weight:600;border:1px solid var(--accent);background:var(--surface);color:var(--accent);border-radius:8px;padding:6px 12px;cursor:pointer}
+.btn.primary{background:var(--accent);color:var(--surface)}
+.filters{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:14px}
+.frow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.flabel{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);min-width:96px}
+.chip{font:inherit;font-size:14px;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:5px 12px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.chip:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tools{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center}
+input[type=search],input[type=text],select{font:inherit;font-size:15px;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+input[type=search]{flex:1 1 260px;min-width:0}
+.toggle{display:flex;gap:8px;align-items:center;font-size:15px;cursor:pointer}
+.toggle input{width:18px;height:18px;accent-color:var(--accent)}
+.linkbtn{font:inherit;font-size:14px;background:none;border:none;color:var(--accent);cursor:pointer;text-decoration:underline;padding:4px}
+.summary{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:15px;color:var(--muted);align-items:center}
+.summary b{color:var(--ink);font-variant-numeric:tabular-nums}
+.summary .newcount b{color:var(--new)}
+.urgent{background:var(--bad-soft);color:var(--ink);border-radius:10px;padding:12px 16px;font-size:15px;display:grid;gap:6px}
+.urgent strong{color:var(--bad)}
+.list{display:grid;gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.card.dim{opacity:.6}
+.card summary{list-style:none;cursor:pointer;padding:16px;display:grid;grid-template-columns:1fr auto;gap:6px 16px}
+.card summary::-webkit-details-marker{display:none}
+.top{min-width:0;display:flex;flex-direction:column;gap:6px}
+.org{font-family:var(--f-display);font-weight:600;font-size:19px;line-height:1.2;margin:0}
+.cargo{color:var(--muted);font-size:15px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card[open] .cargo{display:block;-webkit-line-clamp:unset}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.tag{font-size:12.5px;font-weight:600;padding:2px 8px;border-radius:5px;background:var(--neutral-soft);color:var(--ink)}
+.st-aberto{background:var(--good-soft);color:var(--good)}
+.st-publicado{background:var(--accent-soft);color:var(--accent)}
+.st-previsto{background:var(--neutral-soft);color:var(--muted)}
+.tag.qa{background:var(--warn-soft);color:var(--warn)}
+.tag.tit{background:var(--accent-soft);color:var(--accent)}
+.tag.isen{background:var(--bad-soft);color:var(--bad)}
+.tag.novo{background:var(--new-soft);color:var(--new)}
+.mk-interesse{background:var(--accent);color:var(--surface)}
+.mk-inscrita{background:var(--good);color:var(--surface)}
+.mk-nao{background:var(--neutral-soft);color:var(--muted);text-decoration:line-through}
+.right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;text-align:right}
+.sal{font-family:var(--f-mono);font-size:15px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.prazo{font-size:13.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.prazo.hot{color:var(--bad);font-weight:700}
+.stamp{font-family:var(--f-display);font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;border:2px solid currentColor;border-radius:4px;padding:2px 7px;transform:rotate(-3deg);white-space:nowrap}
+.s-vale{color:var(--good)} .s-ruim{color:var(--bad)} .s-temp{color:var(--muted)}
+.body{border-top:1px solid var(--line);padding:16px;display:grid;gap:14px}
+.marks{display:flex;flex-wrap:wrap;gap:8px}
+.mkbtn{font:inherit;font-size:14px;font-weight:600;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer}
+.mkbtn[data-v="interesse"][aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.mkbtn[data-v="inscrita"][aria-pressed="true"]{background:var(--good);border-color:var(--good);color:var(--surface)}
+.mkbtn[data-v="nao"][aria-pressed="true"]{background:var(--muted);border-color:var(--muted);color:var(--surface)}
+.aval{background:var(--bg);border-radius:8px;padding:12px 14px;font-size:15.5px;max-width:75ch}
+dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px 22px;margin:0}
+dl div{min-width:0}
+dt{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+dd{margin:2px 0 0;font-size:15px}
+dd small{color:var(--muted);font-size:13px}
+.links{display:flex;flex-wrap:wrap;gap:14px;font-size:15px;align-items:center}
+a{color:var(--accent)}
+.empty{padding:24px;text-align:center;color:var(--muted);background:var(--surface);border:1px dashed var(--line);border-radius:10px;display:grid;gap:8px}
+footer{font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;display:grid;gap:6px;max-width:80ch}
+@media (max-width:560px){.card summary{grid-template-columns:1fr}.right{flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:flex-start;text-align:left}.meta{text-align:left}.flabel{min-width:100%}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <img class="logo" src="logo.jpg" alt="Cookie, a cachorrinha, mascote do Cookie Concursos">
+      <h1>Cookie Concursos</h1>
+    </div>
+    <div class="meta">Base conferida em <b>30/10/2026</b><br>Atualiza toda segunda</div>
+  </header>
+
+  <section class="filters" aria-label="Filtros">
+    <div class="frow"><span class="flabel">Onde</span><span id="f-uf" class="frow"></span></div>
+    <div class="frow"><span class="flabel">Esfera</span><span id="f-esfera" class="frow"></span></div>
+    <div class="frow"><span class="flabel">Nível</span><span id="f-nivel" class="frow"></span></div>
+    <div class="frow"><span class="flabel">Situação</span><span id="f-status" class="frow"></span></div>
+    <div class="frow"><span class="flabel">Mostrar</span><span id="f-mostrar" class="frow"></span></div>
+    <div class="frow"><span class="flabel">Títulos</span><span id="f-tit" class="frow"></span></div>
+    <div class="frow"><span class="flabel">Profissão</span><span id="f-areas" class="frow"></span></div>
+    <div class="tools">
+      <input type="search" id="busca" placeholder="Buscar cargo, órgão, cidade ou banca" aria-label="Buscar">
+      <select id="ordem" aria-label="Ordenar">
+        <option value="prazo">Prazo que fecha primeiro</option>
+        <option value="vale">Os que valem a pena primeiro</option>
+        <option value="ruim">Os pouco atrativos primeiro</option>
+        <option value="salario">Maior salário</option>
+      </select>
+    </div>
+    <div class="tools">
+      <button class="linkbtn" id="limpar" type="button">Limpar filtros</button>
+    </div>
+  </section>
+
+  <div class="summary" id="summary"></div>
+  <div class="urgent" id="urgent" hidden></div>
+  <div class="list" id="list"></div>
+
+  <footer>
+    <div><strong>Marcações:</strong> abra um concurso e marque "Tenho interesse", "Me inscrevi" ou "Não serve pra mim". Os sem marcação são os que você ainda não avaliou. Em "Mostrar" dá pra esconder os que não servem. A etiqueta "Novo" aparece nos concursos que entraram na base na atualização mais recente (toda segunda), não depende de quem visitou quando.</div>
+    <div><strong>Prova de títulos:</strong> o filtro "Títulos" mostra se o concurso tem essa fase. Como isso depende de reler o edital de cada um, a maioria ainda está marcada como "Não informado"; vou completando aos poucos nas próximas atualizações.</div>
+    <div><strong>Profissão:</strong> o filtro marca quando o cargo bate com uma das formações que a família está buscando. Sem nenhuma opção marcada, a lista mostra todo mundo; marcando uma ou mais, só aparece quem tem cargo nessa área (ou que aceita qualquer graduação, se você marcar essa opção). Quando um concurso tem vários cargos diferentes, ele aparece se pelo menos um deles bater.</div>
+    <div><strong>Carimbos:</strong> só aparecem em três casos. <span class="s-vale">Vale a pena</span> (bom salário, boas vagas e acesso amplo), <span class="s-ruim">Pouco atrativo</span> (salário baixo pro que exige, ou poucas vagas) e <span class="s-temp">Temporário</span> (sem estabilidade). O resto depende da formação de cada um, e a avaliação dentro da ficha explica.</div>
+    <div><strong>Isenção:</strong> "Conferido no edital" quer dizer que o PDF do edital foi lido. Nos outros, a informação vem da matéria do PCI ou de outro site. Quando a matéria não diz quem tem direito, isso aparece escrito.</div>
+    <div><strong>Fontes:</strong> PCI Concursos, Folha Dirigida, Estratégia, Gran, Direção e JC Concursos, e os editais linkados por eles. "Onde" considera a cidade da prova e a lotação. Concursos encerrados somem sozinhos.</div>
+  </footer>
+</div>
+
+<script>
+const BASE_DATE="2026-10-30";
+/* PREV_DATE marca a rodada de atualização anterior. Na próxima segunda, antes de
+   atualizar a base, troque PREV_DATE pelo BASE_DATE atual (e aí sim atualize o BASE_DATE
+   pra data nova). Assim "Novo" mostra só quem entrou na rodada mais recente, não quem
+   mudou desde a última visita de cada pessoa. */
+const PREV_DATE="2026-10-30";
+const D = [
+/* ===================== FEDERAIS ===================== */
+{id:"camara-rr",orgao:"Câmara dos Deputados",esfera:"Federal",cidade:"Brasília",cargo:"Analista Legislativo: Registro e Redação",nivel:["Superior"],qa:"sim",areas:[],
+ formacao:"Graduação em qualquer área reconhecida pelo MEC (tecnólogo atende).",salario:"R$ 32.070,88",sal:32070,vagas:"25 imediatas + 25 cadastro reserva",
+ ini:"2026-10-15",fim:"2026-11-17",prova:"17/01/2027",taxa:"R$ 130",isencao:"CadÚnico (baixa renda) e doador de medula óssea.",ie:"2026-10-15",ifm:"2026-10-23",lido:true,
+ banca:"Cebraspe",local:"Todas as capitais + DF",lotacao:"Brasília/DF",ufs:["DF","RJ","SP","MG","OUT"],
+ conc:"2012 (Taquígrafo, cargo antecessor): 50,86 candidatos por vaga. Deve subir muito agora.",selo:"vale",
+ aval:"Melhor custo-benefício pra quem tem qualquer graduação: salário de topo e prova de língua, transcrição e processo legislativo, sem contabilidade. Contras: lotação em Brasília e o estilo Cebraspe (uma errada anula uma certa).",
+ fonte:"https://www.pciconcursos.com.br/noticias/camara-dos-deputados-retifica-concurso-publico-para-analistas-legislativos",edital:"https://www.cebraspe.org.br/concursos/cd_26_analista"},
+{id:"camara-esp",orgao:"Câmara dos Deputados",esfera:"Federal",cidade:"Brasília",cargo:"Analista Legislativo: Jornalismo, Divulgação Institucional, Relações Públicas, Arquivologia, Biblioteconomia, Engenharias Civil, Elétrica, Eletrônica e Mecânica, Museólogo",nivel:["Superior"],qa:"nao",areas:["comunicacao"],
+ formacao:"Formação específica de cada especialidade.",salario:"R$ 32.070,88",sal:32070,vagas:"41 imediatas + 93 cadastro reserva",
+ ini:"2026-10-15",fim:"2026-11-17",prova:"17/01/2027",taxa:"R$ 130",isencao:"CadÚnico e doador de medula óssea.",ie:"2026-10-15",ifm:"2026-10-23",lido:true,
+ banca:"Cebraspe",local:"Todas as capitais + DF",lotacao:"Brasília/DF",ufs:["DF","RJ","SP","MG","OUT"],
+ conc:"Edital de dez/2025 (outro cargo de analista): cerca de 1.385 candidatos por vaga, segundo o Estratégia.",selo:"",
+ aval:"Excelente pra quem tem a formação exata. Prova pesada e concorrência alta.",
+ fonte:"https://www.pciconcursos.com.br/noticias/camara-dos-deputados-retifica-concurso-publico-para-analistas-legislativos",edital:"https://www.cebraspe.org.br/concursos/cd_26_analista"},
+{id:"cgu",orgao:"CGU (Controladoria-Geral da União)",esfera:"Federal",cidade:"Brasília",cargo:"Auditor Federal de Finanças e Controle: Auditoria e TI",nivel:["Superior"],qa:"sim",areas:[],
+ formacao:"Graduação em qualquer área reconhecida pelo MEC.",salario:"R$ 20.000 + R$ 1.192 de auxílio",sal:21192,vagas:"60 imediatas + cadastro reserva",
+ ini:"2026-10-10",fim:"2026-11-04",prova:"13/12/2026",taxa:"R$ 170",isencao:"CadÚnico, baixa renda e doador de medula óssea.",ie:"2026-10-10",ifm:"2026-10-16",
+ banca:"Cebraspe",local:"Todas as 27 capitais",lotacao:"Brasília/DF (50 vagas) e AC, AP, MT, RO, RR (10)",ufs:["DF","RJ","SP","MG","OUT"],
+ conc:"2021/22 (FGV): Auditoria 139 por vaga; TI 52,9 por vaga.",selo:"",
+ aval:"Carreira de elite e aceita qualquer área, mas a prova é técnica (auditoria, finanças) e falta pouco tempo. Vale pra quem já tem base ou quer treinar prova Cebraspe.",
+ fonte:"https://www.pciconcursos.com.br/noticias/cgu-abre-concurso-publico-com-vagas-para-auditores-federais-de-financas-e-controle",edital:"https://www.cebraspe.org.br/concursos/cgu_26_affc"},
+{id:"trf3",orgao:"TRF3 (Justiça Federal SP e MS)",esfera:"Federal",cidade:"São Paulo",cargo:"Técnico Judiciário: Desenvolvimento de Sistemas, Suporte Técnico, Contabilidade, TI. Analista Judiciário: Análise de Sistemas, Suporte em TI, Oficial de Justiça, Área Judiciária",nivel:["Superior"],qa:"parcial",areas:[],
+ formacao:"Técnico de TI, Desenvolvimento e Suporte: graduação em qualquer área + cursos de TI somando 120 horas. Analista de TI: graduação em TI, ou qualquer área com pós em TI. Oficial de Justiça e Área Judiciária: Direito. Contabilidade: Ciências Contábeis.",
+ salario:"R$ 9.776,73 a R$ 20.013,11",sal:20013,vagas:"11 imediatas (TI no TRF3) + cadastro reserva",
+ ini:"2026-11-04",fim:"2026-11-23",prova:"31/01/2027",taxa:"R$ 100 (técnico) / R$ 160 (analista)",isencao:"CadÚnico e doador de medula óssea.",ie:"2026-11-04",ifm:"2026-11-05",
+ banca:"Vunesp",local:"São Paulo, Araçatuba, Bauru, Ribeirão Preto, Campo Grande e Dourados",lotacao:"São Paulo e Mato Grosso do Sul",ufs:["SP","OUT"],
+ conc:"Sem dado de concorrência anterior.",selo:"",
+ aval:"Bom salário e prova na capital. Técnico de TI aceita qualquer graduação com 120h de cursos de TI (dá pra fazer online). O pedido de isenção dura só 2 dias.",
+ fonte:"https://blog.grancursosonline.com.br/concurso-trf3-edital-publicado-2026/",edital:"https://blog-static.infra.grancursosonline.com.br/wp-content/uploads/2026/10/26084718/edital-trf3-2026-1.pdf"},
+{id:"abdi",orgao:"ABDI (Agência Brasileira de Desenvolvimento Industrial)",esfera:"Federal",cidade:"Brasília",cargo:"Analista de Produtividade e Inovação (CLT): Produtividade Industrial, Contabilidade, Administrativo, Dados, Desenvolvimento de TI, Infraestrutura, Jurídico, Gestão de Pessoas, Comunicação e Marketing",nivel:["Superior"],qa:"nao",areas:["comunicacao"],
+ formacao:"Superior ligado ao perfil escolhido.",salario:"R$ 16.034,70",sal:16034,vagas:"20 imediatas + cadastro reserva",
+ ini:"2026-10-20",fim:"2026-11-10",prova:"20/12/2026",taxa:"R$ 100",isencao:"CadÚnico e doador de medula óssea.",ie:"2026-10-20",ifm:"2026-10-22",
+ banca:"FGV",local:"Online (todas as etapas telepresenciais)",lotacao:"Brasília/DF (a conferir)",ufs:["DF","RJ","SP","MG","OUT"],
+ conc:"Sem dado de concorrência anterior.",selo:"",
+ aval:"Salário ótimo e prova online. Mas é CLT (sem estabilidade de estatutário) e cada perfil pede formação ligada à área.",
+ fonte:"https://www.pciconcursos.com.br/noticias/abdi-df-processo-seletivo-abre-vagas-para-analistas-de-produtividade-e-inovacao",edital:"https://conhecimento.fgv.br"},
+{id:"inb",orgao:"INB (Indústrias Nucleares do Brasil)",esfera:"Federal",cidade:"Rio de Janeiro e Resende",cargo:"Assistente Administrativo, Inspetor de Guarda, Desenhista Projetista, Operador de Processos, técnicos (Enfermagem do Trabalho, Segurança do Trabalho, Química, Logística e outros), Administrador, Advogado, Analista de Comunicação, Arquivologista, Contador, Engenheiros e outros (CLT)",nivel:["Médio","Superior"],qa:"nao",areas:["comunicacao","quimica","adm"],
+ formacao:"Específica por cargo. Assistente Administrativo é de nível médio.",salario:"R$ 3.452 a R$ 8.374",sal:8374,vagas:"Só cadastro reserva",
+ ini:"2026-10-13",fim:"2026-11-11",prova:"10/01/2027",taxa:"R$ 100 (médio) / R$ 125 (superior)",isencao:"CadÚnico e doador de medula óssea.",ie:"2026-10-13",ifm:"2026-10-15",
+ banca:"FGV",local:"Rio de Janeiro, Resende (RJ), Caetité (BA), Poços de Caldas (MG)",lotacao:"Rio, Resende, Caetité, Caldas",ufs:["RJ","MG","OUT"],
+ conc:"Sem dado de concorrência anterior.",selo:"",
+ aval:"Estatal CLT. Só tem cadastro reserva, então a nomeação depende da empresa chamar. Uma das poucas opções federais de nível médio abertas agora.",
+ fonte:"https://www.pciconcursos.com.br/noticias/inb-abre-concurso-publico-para-cadastro-de-reserva-em-diversas-areas-de-atuacao",edital:"https://conhecimento.fgv.br/processoseletivo/inb2026"},
+{id:"marinha-1dn",orgao:"Marinha: 1º Distrito Naval",esfera:"Federal",cidade:"Rio de Janeiro",cargo:"Oficial temporário (RM2): Medicina, Odontologia, Farmácia, Enfermagem, Fisioterapia, Nutrição, Administração, Arquivologia, Biblioteconomia, Contábeis, Comunicação Social, Direito, Estatística, Informática, Psicologia, Serviço Social, professores (Letras, Pedagogia, Matemática) e Engenharias",nivel:["Superior"],qa:"nao",areas:["comunicacao","pedagogia","servico-social"],
+ formacao:"Superior na área escolhida.",salario:"Não informado na matéria",sal:0,vagas:"171",
+ ini:"2026-09-18",fim:"2026-11-10",prova:"21/02/2027",taxa:"R$ 150",isencao:"A matéria não informa isenção.",
+ banca:"Marinha",local:"Rio de Janeiro",lotacao:"Rio, São Pedro da Aldeia, Itaguaí, Arraial do Cabo, Angra dos Reis e Pirapora (MG)",ufs:["RJ","MG"],
+ conc:"Sem dado.",selo:"temp",
+ aval:"Serviço militar temporário (até 8 anos), sem estabilidade, com prova, títulos e teste físico. Leque de áreas grande, inclusive Comunicação Social e Letras.",
+ fonte:"https://www.pciconcursos.com.br/noticias/comando-do-1-distrito-naval-rj-mg-abre-vagas-para-oficiais-temporarios-de-nivel-superior",edital:""},
+{id:"marinha-8dn",orgao:"Marinha: 8º Distrito Naval",esfera:"Federal",cidade:"São Paulo",cargo:"Oficial temporário (RM2): Medicina (Auditoria Médica, Endocrinologia), Letras Inglês, Fisioterapia, Administração, Contábeis, Comunicação Social, Informática, Segurança do Tráfego Aquaviário e Engenharias",nivel:["Superior"],qa:"nao",areas:["comunicacao"],
+ formacao:"Superior na área escolhida.",salario:"Não informado na matéria",sal:0,vagas:"36",
+ ini:"2026-09-18",fim:"2026-11-10",prova:"Conforme edital",taxa:"R$ 150",isencao:"A matéria não informa isenção.",
+ banca:"Marinha",local:"São Paulo",lotacao:"São Paulo, Santos e Iperó",ufs:["SP"],
+ conc:"Sem dado.",selo:"temp",
+ aval:"Temporário, bom como experiência e renda se a sua área estiver na lista.",
+ fonte:"https://www.pciconcursos.com.br/noticias/marinha-do-brasil-8-distrito-naval-abre-vagas-para-oficiais-rm2-em-sp",edital:""},
+{id:"receita",orgao:"Receita Federal",esfera:"Federal",cidade:"Todo o Brasil",cargo:"Auditor-Fiscal e Analista-Tributário",nivel:["Superior"],qa:"sim",areas:[],
+ formacao:"Superior em qualquer área.",salario:"A partir de R$ 24.113,71 (segundo a Folha)",sal:24113,vagas:"146",
+ ini:"",fim:"",prova:"Prevista a partir de fev/2027",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"A definir",local:"A definir",lotacao:"Todo o Brasil",ufs:["DF","RJ","SP","MG","OUT"],
+ conc:"Sem dado no recorte.",selo:"vale",
+ aval:"Autorizado, edital previsto pra dezembro. Aceita qualquer área e paga muito bem, mas a prova é das mais pesadas (tributário, contabilidade). Começar a estudar agora faz diferença.",
+ fonte:"https://folha.qconcursos.com/n/concursos-federais",edital:""},
+{id:"bacen",orgao:"Banco Central",esfera:"Federal",cidade:"Brasília e regionais",cargo:"Técnico, Auditor e Procurador",nivel:["Médio","Superior"],qa:"nao",areas:[],
+ formacao:"Técnico: nível médio. Procurador: Direito. Auditor: ver edital.",salario:"R$ 8.300 a R$ 27.264,30",sal:27264,vagas:"170",
+ ini:"",fim:"",prova:"Prevista a partir de mar/2027",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"Em contratação",local:"A definir",lotacao:"Brasília e regionais (inclui RJ, SP, BH)",ufs:["DF","RJ","SP","MG","OUT"],
+ conc:"Sem dado no recorte.",selo:"vale",
+ aval:"Autorizado. As 50 vagas de Técnico (nível médio) são uma das melhores chances federais pra quem só tem médio.",
+ fonte:"https://folha.qconcursos.com/n/concursos-federais",edital:""},
+{id:"anpd",orgao:"ANPD (Autoridade Nacional de Proteção de Dados)",esfera:"Federal",cidade:"Brasília",cargo:"Especialista em Regulação de Proteção de Dados",nivel:["Superior"],qa:"nao",areas:[],
+ formacao:"Superior (requisito a definir no edital).",salario:"R$ 16.413,35",sal:16413,vagas:"50",
+ ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"A definir",local:"A definir",lotacao:"Brasília/DF",ufs:["DF","OUT"],
+ conc:"Primeiro concurso do cargo.",selo:"",
+ aval:"Autorizado. Carreira nova de agência reguladora, ligada a dados e tecnologia. Acompanhar pra ver se aceita qualquer área.",
+ fonte:"https://folha.qconcursos.com/n/concursos-federais",edital:""},
+{id:"agu",orgao:"AGU (Advocacia-Geral da União)",esfera:"Federal",cidade:"Todo o Brasil",cargo:"Advogado da União, Procurador Federal, Procurador da Fazenda Nacional e Procurador do BC",nivel:["Superior"],qa:"nao",areas:[],
+ formacao:"Direito (com prática jurídica).",salario:"R$ 24.967,31",sal:24967,vagas:"170",
+ ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"Em definição",local:"A definir",lotacao:"Todo o Brasil",ufs:["DF","RJ","SP","MG","OUT"],
+ conc:"Sem dado no recorte.",selo:"",aval:"Só pra quem é formado em Direito e já estuda pra carreiras jurídicas.",
+ fonte:"https://folha.qconcursos.com/n/concursos-federais",edital:""},
+{id:"trt3",orgao:"TRT-3 (Justiça do Trabalho MG)",esfera:"Federal",cidade:"Belo Horizonte",cargo:"Técnico Judiciário e Analista Judiciário",nivel:["Superior"],qa:"parcial",areas:[],
+ formacao:"Técnico: superior em qualquer área (regra atual da Justiça federal). Analista: depende da especialidade.",salario:"Até R$ 16.040,88",sal:16040,vagas:"Cadastro reserva",
+ ini:"",fim:"",prova:"A definir (2027)",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"A definir",local:"MG",lotacao:"Minas Gerais",ufs:["MG"],
+ conc:"Sem dado no recorte.",selo:"vale",
+ aval:"Autorizado pra 2027. Tribunal do Trabalho é muito disputado, mas costuma chamar bastante gente ao longo da validade.",
+ fonte:"https://blog.grancursosonline.com.br/concurso-trt-mg/",edital:""},
+{id:"trt23",orgao:"TRT-23 (Justiça do Trabalho MT)",esfera:"Federal",cidade:"Cuiabá",cargo:"Técnico Judiciário e Analista Judiciário",nivel:["Superior"],qa:"parcial",areas:[],
+ formacao:"Técnico: superior em qualquer área. Analista: depende da especialidade.",salario:"R$ 9.776,71 a R$ 16.040,88",sal:16040,vagas:"A definir",
+ ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"FCC",local:"MT",lotacao:"Mato Grosso",ufs:["OUT"],
+ conc:"Sem dado no recorte.",selo:"",aval:"Autorizado, banca FCC. Lotação no MT.",
+ fonte:"https://folha.qconcursos.com/n/concursos-federais",edital:""},
+
+/* ===================== SP ESTADUAL ===================== */
+{id:"sefaz-sp",orgao:"Sefaz SP",esfera:"Estadual",cidade:"São Paulo",cargo:"Analista em Planejamento, Orçamento e Finanças Públicas (APOFP): Orçamento e Finanças, Contabilidade Pública, Ciência de Dados/TI",nivel:["Superior"],qa:"sim",areas:[],
+ formacao:"Superior completo em qualquer área.",salario:"R$ 11.359,50 (com prêmio máximo)",sal:11359,vagas:"60 imediatas",
+ ini:"2026-10-05",fim:"2026-11-03",prova:"13/12/2026 (a Folha diz 20/12: conferir)",taxa:"R$ 150",isencao:"Doador de sangue (isenção); estudante com renda menor que 2 salários mínimos ou desempregado (redução de 50%).",ie:"2026-10-05",ifm:"2026-10-09",
+ banca:"FCC",local:"São Paulo (capital)",lotacao:"São Paulo",ufs:["SP"],
+ conc:"Último em 2013 (Vunesp): sem número de inscritos.",selo:"",
+ aval:"Boa carreira e aceita qualquer área, mas cobra AFO, contabilidade e direito financeiro, com discursiva e corte alto. Difícil começando do zero.",
+ fonte:"https://www.pciconcursos.com.br/noticias/sefaz-sp-abre-concurso-publico-para-analista-em-planejamento-orcamento-e-financas-publicas",edital:"https://www.concursosfcc.com.br"},
+{id:"tjsp-oj",orgao:"TJ SP",esfera:"Estadual",cidade:"Estado de SP",cargo:"Oficial de Justiça",nivel:["Superior"],qa:"sim",areas:[],
+ formacao:"Superior em qualquer área, segundo a Folha Dirigida.",salario:"R$ 9.856,95 + auxílios",sal:9856,vagas:"132 imediatas + cadastro reserva",
+ ini:"2026-10-28",fim:"2026-12-10",prova:"14/03/2027",taxa:"R$ 96",isencao:"Redução de 50% pra estudante com renda menor que 2 salários mínimos ou desempregado.",ie:"2026-10-28",ifm:"2026-10-30",
+ banca:"Vunesp",local:"Estado de SP",lotacao:"Comarcas de SP",ufs:["SP"],
+ conc:"Sem dado no recorte.",selo:"vale",
+ aval:"Muitas vagas imediatas, salário bom, aceita qualquer área e a Vunesp é uma banca previsível. 4 meses até a prova. Uma das melhores apostas abertas agora.",
+ fonte:"https://www.pciconcursos.com.br/noticias/tjsp-abre-concursos-para-oficial-de-justica-e-escrevente-tecnico-judiciario",edital:"https://www.vunesp.com.br"},
+{id:"tjsp-esc",orgao:"TJ SP",esfera:"Estadual",cidade:"Estado de SP",cargo:"Escrevente Técnico Judiciário",nivel:["Médio"],qa:"sim",areas:[],
+ formacao:"Ensino médio completo.",salario:"R$ 6.782,54 + auxílios",sal:6782,vagas:"Só cadastro reserva",
+ ini:"2026-10-28",fim:"2026-12-10",prova:"14/03/2027",taxa:"R$ 81",isencao:"Redução de 50% pra estudante com renda menor que 2 salários mínimos ou desempregado.",ie:"2026-10-28",ifm:"2026-10-30",
+ banca:"Vunesp",local:"Estado de SP",lotacao:"Comarcas de SP",ufs:["SP"],
+ conc:"Historicamente muito concorrido (dezenas de milhares de inscritos).",selo:"vale",
+ aval:"Um dos melhores salários de nível médio do estado. É só cadastro reserva, mas o TJ SP costuma chamar muita gente ao longo da validade.",
+ fonte:"https://www.pciconcursos.com.br/noticias/tjsp-abre-concursos-para-oficial-de-justica-e-escrevente-tecnico-judiciario",edital:"https://www.vunesp.com.br"},
+{id:"dpe-sp",orgao:"Defensoria Pública de SP",esfera:"Estadual",cidade:"São Paulo",cargo:"Defensor Público",nivel:["Superior"],qa:"nao",areas:[],
+ formacao:"Bacharelado em Direito.",salario:"R$ 29.716",sal:29716,vagas:"70",
+ ini:"2026-10-13",fim:"2026-11-11",prova:"10/01/2027",taxa:"R$ 250",isencao:"Isenção pra doador de sangue (3 doações em 12 meses); redução pra estudante com baixa renda ou desempregado.",ie:"2026-10-13",ifm:"2026-10-14",
+ banca:"FCC",local:"São Paulo",lotacao:"Estado de SP",ufs:["SP"],
+ conc:"Sem dado no recorte.",selo:"",aval:"Só pra Direito, e é carreira jurídica de alto nível.",
+ fonte:"https://folha.qconcursos.com/n/concurso-dpe-sp-defensor-edital-2026",edital:""},
+{id:"ipa-sp",orgao:"IPA SP (Instituto de Pesquisas Ambientais)",esfera:"Estadual",cidade:"Estado de SP",cargo:"Pesquisador Científico I A em 45 áreas (Restauração de Ecossistemas 10, Taxonomia de Angiospermas 9, Agroecologia 5, Gestão de Riscos e Desastres 6, Educação Ambiental, Bioeconomia, Climatologia, Geologia e outras)",nivel:["Superior"],qa:"nao",areas:[],
+ formacao:"Superior ligado à área escolhida.",salario:"R$ 9.052,47",sal:9052,vagas:"98",
+ ini:"2026-11-18",fim:"2026-12-22",prova:"14/02/2027",taxa:"R$ 150",isencao:"Doador de sangue (isenção); estudante com renda menor que 2 salários mínimos ou desempregado (redução de 50%).",ie:"2026-11-18",ifm:"2026-11-19",
+ banca:"Vunesp",local:"A definir (SP)",lotacao:"Estado de SP",ufs:["SP"],
+ conc:"Sem dado.",selo:"",aval:"Pra quem tem formação e pesquisa na área ambiental. Tem prova de títulos, então mestrado e doutorado pesam.",
+ fonte:"https://www.pciconcursos.com.br/noticias/ipa-sp-abre-concurso-publico-para-pesquisadores-cientificos",edital:"https://www.vunesp.com.br"},
+{id:"bombeiro-gv",orgao:"Corpo de Bombeiros SP",esfera:"Estadual",cidade:"Litoral e represas de SP",cargo:"Guarda-Vidas Temporário (Praia Grande 70, Guarujá 45, Itanhaém 45, Mongaguá 44, Bertioga 40, Ubatuba 35, Guarapiranga 30 e outros)",nivel:["Fundamental"],qa:"sim",areas:[],
+ formacao:"Ensino fundamental completo e 18 anos.",salario:"R$ 2.534,20 + vale-transporte e refeição",sal:2534,vagas:"466",
+ ini:"2026-10-21",fim:"2026-11-09",prova:"Testes de natação e corrida em 10/11/2026",taxa:"Gratuita",isencao:"Não precisa: inscrição gratuita.",
+ banca:"Corpo de Bombeiros",local:"Postos do litoral e represas",lotacao:"Contrato de até 5 meses",ufs:["SP"],
+ conc:"Sem dado.",selo:"temp",aval:"Temporário de temporada, com teste de natação (200 m em 6 min) e corrida. Renda extra, não carreira.",
+ fonte:"https://folha.qconcursos.com/n/bombeiros-sp-edital-guarda-vidas-2026",edital:""},
+{id:"mp-sp",orgao:"MP SP",esfera:"Estadual",cidade:"Estado de SP",cargo:"Analista Jurídico, Analista de Promotoria I e II",nivel:["Superior"],qa:"nao",areas:[],
+ formacao:"Superior (Analista Jurídico costuma exigir Direito). Conferir no edital.",salario:"R$ 8.529,79 a R$ 13.581,75",sal:13581,vagas:"20 imediatas + cadastro reserva",
+ ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"A definir",local:"SP",lotacao:"Estado de SP",ufs:["SP"],
+ conc:"Sem dado no recorte.",selo:"",aval:"Autorizado. Analista de Promotoria costuma aceitar mais formações. Vale acompanhar.",
+ fonte:"https://folha.qconcursos.com/e/ministerio-publico-de-sao-paulo",edital:""},
+{id:"pm-sp-of",orgao:"PM SP",esfera:"Estadual",cidade:"Estado de SP",cargo:"Aluno-Oficial (CFO)",nivel:["Médio"],qa:"sim",areas:[],
+ formacao:"Ensino médio, segundo a Folha.",salario:"R$ 5.460,65 na formação",sal:5460,vagas:"200",
+ ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"A confirmar",local:"SP",lotacao:"Estado de SP",ufs:["SP"],
+ conc:"Sem dado no recorte.",selo:"",aval:"Autorizado. Carreira militar com limite de idade, teste físico e formação longa.",
+ fonte:"https://folha.qconcursos.com/n/concurso-pm-sp",edital:""},
+{id:"ses-sp",orgao:"SES SP (Saúde)",esfera:"Estadual",cidade:"Estado de SP",cargo:"Médico, Enfermeiro, Técnico de Enfermagem e outras carreiras da saúde",nivel:["Médio","Superior"],qa:"nao",areas:[],
+ formacao:"Específica da saúde.",salario:"A confirmar",sal:0,vagas:"532 (autorização do governador)",
+ ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"A definir",local:"SP",lotacao:"Estado de SP",ufs:["SP"],
+ conc:"Sem dado.",selo:"",aval:"Autorizado. Só pra quem é da saúde. Quando sair o edital, vale procurar cargos técnicos (gesso, raio X) aqui.",
+ fonte:"https://folha.qconcursos.com/n/concurso-ses-sp-2026-autorizacao-575-vagas",edital:""},
+{id:"pcient-sp",orgao:"Polícia Científica SP",esfera:"Estadual",cidade:"Estado de SP",cargo:"Atendente de Necrotério, Auxiliar de Necropsia, Desenhista Técnico-Pericial, Fotógrafo Técnico-Pericial, Médico-Legista",nivel:["Médio","Superior"],qa:"nao",areas:[],
+ formacao:"Médio para a maioria; Medicina para médico-legista.",salario:"R$ 4.725,36 a R$ 14.962,34",sal:14962,vagas:"397",
+ ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"A definir",local:"SP",lotacao:"Estado de SP",ufs:["SP"],
+ conc:"Sem dado.",selo:"vale",aval:"Autorizado. Muitas vagas de nível médio na área policial, sem curso de formação militar.",
+ fonte:"https://folha.qconcursos.com/n/concursos-sao-paulo",edital:""},
+
+/* ===================== RJ ESTADUAL ===================== */
+{id:"cbmerj",orgao:"Corpo de Bombeiros RJ",esfera:"Estadual",cidade:"Rio de Janeiro",cargo:"1º Tenente Temporário: Médico, Dentista, Fonoaudiólogo, Psicólogo, Nutricionista, Fisioterapeuta",nivel:["Superior"],qa:"nao",areas:[],tit:"sim",
+ formacao:"Formação na área com registro no conselho. Idade máxima de 35 anos.",salario:"R$ 10.466,77 (formação) / R$ 12.279,71",sal:12279,vagas:"192 (120 na capital)",
+ ini:"2026-10-19",fim:"2026-11-09",prova:"Sem prova objetiva: títulos, teste físico e exames",taxa:"R$ 95,31",isencao:"CadÚnico (renda até meio salário mínimo por pessoa), doador de medula e mesário da Justiça Eleitoral do RJ.",ie:"2026-10-19",ifm:"2026-10-23",lido:true,
+ banca:"Instituto AOCP",local:"Sem prova escrita",lotacao:"RJ (8 regiões)",ufs:["RJ"],
+ conc:"Sem dado.",selo:"temp",aval:"Temporário de até 8 anos. Bom pra quem é da saúde e tem títulos.",
+ fonte:"https://folha.qconcursos.com/n/concurso-cbmerj-smtv-2026-edital-tenente",edital:"https://arquivos.qconcursos.com/regulamento/arquivo/102243/cbm-rj-2026-1-tenente-bm-edital-n-1-edital.pdf"},
+{id:"seeduc-rj",orgao:"Seeduc RJ",esfera:"Estadual",cidade:"Estado do RJ",cargo:"Professor temporário (Normal e licenciaturas)",nivel:["Médio","Superior"],qa:"nao",areas:["pedagogia"],
+ formacao:"Normal (nível médio) ou licenciatura.",salario:"R$ 2.190,50 a R$ 3.650,83",sal:3650,vagas:"1.750 temporárias",
+ ini:"",fim:"2026-11-30",st:"aberto",prova:"Análise de documentos",taxa:"Gratuita (seleção própria)",isencao:"Não se aplica.",
+ banca:"Própria",local:"RJ",lotacao:"Estado do RJ",ufs:["RJ"],
+ conc:"Sem dado.",selo:"temp",aval:"Seleção temporária contínua (reabre em 2027). Pra quem tem licenciatura e quer renda rápida.",
+ fonte:"https://folha.qconcursos.com/n/concursos-rio-de-janeiro",edital:""},
+{id:"pc-rj",orgao:"Polícia Civil RJ",esfera:"Estadual",cidade:"Estado do RJ",cargo:"Perito Legista, Perito Criminal, Piloto Policial",nivel:["Superior"],qa:"nao",areas:[],
+ formacao:"Superior em áreas específicas (Medicina pra legista).",salario:"R$ 13.786,36 a R$ 13.981,45",sal:13981,vagas:"329",
+ ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"FGV",local:"RJ",lotacao:"Estado do RJ",ufs:["RJ"],
+ conc:"Sem dado.",selo:"",aval:"Banca já definida. Perito Criminal costuma aceitar várias graduações de exatas e biológicas.",
+ fonte:"https://folha.qconcursos.com/e/policia-civil-do-rio-de-janeiro",edital:""},
+{id:"pmerj-cfo",orgao:"PM RJ",esfera:"Estadual",cidade:"Estado do RJ",cargo:"Oficial (CFO)",nivel:["Superior"],qa:"nao",areas:[],
+ formacao:"Direito.",salario:"A partir de R$ 4.127,16",sal:4127,vagas:"100",
+ ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"Cesgranrio",local:"RJ",lotacao:"Estado do RJ",ufs:["RJ"],
+ conc:"Sem dado.",selo:"ruim",aval:"Exige Direito, teste físico e limite de idade, e o salário de entrada é baixo pra isso.",
+ fonte:"https://folha.qconcursos.com/n/concurso-pmerj-cfo-2026-banca-contratada",edital:""},
+{id:"tce-rj",orgao:"TCE RJ",esfera:"Estadual",cidade:"Rio de Janeiro",cargo:"Auditor de Controle Externo",nivel:["Superior"],qa:"nao",areas:[],
+ formacao:"Superior (requisito a definir).",salario:"Acima de R$ 13 mil (edital anterior)",sal:13000,vagas:"40 (sujeitas a revisão)",
+ ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"A definir",local:"RJ",lotacao:"Rio de Janeiro",ufs:["RJ"],
+ conc:"Sem dado.",selo:"vale",aval:"Orçamento aprovado pra 2027. Tribunal de contas paga bem e tem carreira boa, mas a prova é técnica.",
+ fonte:"https://folha.qconcursos.com/n/concursos-rio-de-janeiro",edital:""},
+{id:"inea",orgao:"Inea RJ",esfera:"Estadual",cidade:"Estado do RJ",cargo:"Cargos ambientais e administrativos de nível médio, técnico e superior",nivel:["Médio","Superior"],qa:"nao",areas:[],
+ formacao:"Específica por cargo.",salario:"R$ 2.654,48 a R$ 7.183,19",sal:7183,vagas:"150",
+ ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"Em definição",local:"RJ",lotacao:"Estado do RJ",ufs:["RJ"],
+ conc:"Sem dado.",selo:"",aval:"Oficialmente autorizado. Bom número de vagas no RJ, inclusive de nível médio. A lista de cargos sai no edital.",
+ fonte:"https://folha.qconcursos.com/n/concurso-inea-rj-2025-acao-do-mp",edital:""},
+{id:"agetransp",orgao:"Agetransp RJ",esfera:"Estadual",cidade:"Rio de Janeiro",cargo:"Assistente de Regulação, Analista Técnico e Especialista em Regulação",nivel:["Médio","Superior"],qa:"nao",areas:[],
+ formacao:"Médio e superior (a definir).",salario:"A partir de R$ 2.160",sal:2160,vagas:"25",
+ ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"FGV",local:"RJ",lotacao:"Rio de Janeiro",ufs:["RJ"],
+ conc:"Sem dado.",selo:"ruim",aval:"Poucas vagas, salário de entrada baixo e banca FGV (difícil).",
+ fonte:"https://folha.qconcursos.com/n/concurso-agetransp-rj-2024-contrato-publicado",edital:""},
+{id:"theatro",orgao:"Theatro Municipal do RJ",esfera:"Estadual",cidade:"Rio de Janeiro",cargo:"Cargos artísticos, técnicos de palco, figurino e administrativos",nivel:["Fundamental","Médio","Superior"],qa:"nao",areas:[],
+ formacao:"Varia por cargo.",salario:"R$ 1.077,73 a R$ 3.790,43",sal:3790,vagas:"110",
+ ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"Instituto Avalia",local:"Rio de Janeiro",lotacao:"Rio de Janeiro (capital)",ufs:["RJ"],
+ conc:"Sem dado.",selo:"ruim",aval:"Salários baixos. Mas pode ter cargo técnico de figurino ou costura que combine com quem é de moda, então vale olhar quando o edital sair.",
+ fonte:"https://folha.qconcursos.com/n/concurso-theatro-municipal-rj-2026-banca",edital:""},
+
+/* ===================== MG ESTADUAL ===================== */
+{id:"pmmg-of",orgao:"PM MG",esfera:"Estadual",cidade:"Belo Horizonte",cargo:"Oficial (CFO 2027)",nivel:["Superior"],qa:"nao",areas:[],
+ formacao:"Bacharelado em Direito. Idade de 18 a 30 anos.",salario:"R$ 7.912,17 (cadete) / R$ 12.170,61 (2º tenente)",sal:12170,vagas:"90",
+ ini:"2026-11-10",fim:"2026-12-10",prova:"10/01/2027",taxa:"R$ 243",isencao:"Desempregado sem renda, doador regular de sangue, mesário da Justiça Eleitoral de MG nos últimos 2 anos, ou CadÚnico.",ie:"2026-11-10",ifm:"2026-11-11",lido:true,
+ banca:"Própria (CRS/PMMG)",local:"BH e mais 16 cidades de MG",lotacao:"Minas Gerais",ufs:["MG"],
+ conc:"2025: 60 vagas (sem número de inscritos).",selo:"",aval:"Só pra Direito e até 30 anos. Taxa alta, então vale pedir isenção.",
+ fonte:"https://blog.grancursosonline.com.br/concurso-oficial-pmmg/",edital:"https://blog-static.infra.grancursosonline.com.br/wp-content/uploads/2026/09/03094940/edital-oficial-pmmg-2026.pdf"},
+{id:"mgs",orgao:"MGS (Minas Gerais Administração e Serviços)",esfera:"Estadual",cidade:"BH, Contagem e Guaxupé",cargo:"Serviços Auxiliares: Limpeza, Alimentação, Logística, Coveiro, Técnico em Edificação e cadastro reserva em dezenas de funções (CLT)",nivel:["Fundamental","Médio"],qa:"sim",areas:[],
+ formacao:"Fundamental, médio ou técnico, conforme a função.",salario:"R$ 1.185,69 a R$ 3.911,17",sal:3911,vagas:"643 imediatas + cadastro reserva",
+ ini:"2026-10-19",fim:"2026-11-09",prova:"13/12/2026",taxa:"R$ 60,36 (fundamental) / R$ 71,17 (médio e técnico)",isencao:"CadÚnico (família de baixa renda).",ie:"2026-10-19",ifm:"2026-10-20",
+ banca:"IBFC",local:"Cidades indicadas no edital",lotacao:"BH e região, Contagem, Guaxupé",ufs:["MG"],
+ conc:"Sem dado.",selo:"",aval:"Estatal CLT com muitas vagas pra fundamental e médio. Entrada rápida, salário modesto.",
+ fonte:"https://www.pciconcursos.com.br/noticias/mgs-abre-processo-seletivo-com-vagas-imediatas-e-cadastro-de-reserva-em-diversas-areas",edital:""},
+{id:"epamig",orgao:"Epamig",esfera:"Estadual",cidade:"Estado de MG",cargo:"Cargos de pesquisa agropecuária de nível médio e superior",nivel:["Médio","Superior"],qa:"nao",areas:[],
+ formacao:"Específica por cargo.",salario:"Não informado",sal:0,vagas:"257",
+ ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"A definir",local:"MG",lotacao:"Minas Gerais",ufs:["MG"],
+ conc:"Sem dado.",selo:"",aval:"Autorizado. Bom volume de vagas, perfil agro. A lista de cargos sai no edital.",
+ fonte:"https://blog.grancursosonline.com.br/concurso-epamig/",edital:""},
+
+/* ===================== DF (DISTRITAL) ===================== */
+{id:"dpdf",orgao:"Defensoria Pública do DF",esfera:"Estadual",cidade:"Brasília",cargo:"Analista de Apoio à Assistência Judiciária: Direito, Contabilidade, Informática (Banco de Dados, Desenvolvimento, Redes)",nivel:["Superior"],qa:"parcial",areas:[],
+ formacao:"Direito: graduação em Direito. Contabilidade: Ciências Contábeis + registro. Informática: graduação em TI, ou qualquer área com especialização em TI.",salario:"R$ 11.514,95 + R$ 1.701,41 de auxílio",sal:13216,vagas:"7 imediatas + 700 cadastro reserva",
+ ini:"2026-12-03",fim:"2027-01-07",prova:"21/02/2027",taxa:"R$ 110",isencao:"Doador de sangue (3 doações no ano anterior); programa social do GDF; CadÚnico; renda por pessoa até 1,5 salário mínimo com médio em escola pública ou bolsa integral; mesário em 2 eleições; doador de medula; comissário da Infância e Juventude; PcD carente; doadora de leite materno. Pedido antes das inscrições, no prazo do Anexo II.",lido:true,
+ banca:"Instituto ACCESS",local:"Distrito Federal",lotacao:"Brasília/DF",ufs:["DF"],
+ conc:"Sem dado.",selo:"",aval:"Cadastro reserva gigante (700), o que indica chamadas ao longo da validade. Informática aceita qualquer graduação com especialização em TI. Lista de isenção bem ampla.",
+ fonte:"https://blog.grancursosonline.com.br/concurso-dpdf/",edital:"https://blog-static.infra.grancursosonline.com.br/wp-content/uploads/2026/10/26055638/edital-dpdf-2026.pdf"},
+{id:"pcdf-cust",orgao:"Polícia Civil DF",esfera:"Estadual",cidade:"Brasília",cargo:"Agente Policial de Custódia",nivel:["Superior"],qa:"nao",areas:[],
+ formacao:"Superior (a confirmar no edital).",salario:"R$ 9.394,68 a R$ 14.851,63",sal:14851,vagas:"50 imediatas + 100 cadastro reserva",
+ ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"A definir",local:"Brasília",lotacao:"Brasília/DF",ufs:["DF"],
+ conc:"Sem dado.",selo:"vale",aval:"Vagas autorizadas. Carreira policial com bom salário. Confirmar se aceita qualquer graduação quando sair o edital.",
+ fonte:"https://blog.grancursosonline.com.br/concurso-pcdf-agente-de-custodia/",edital:""},
+{id:"ibram",orgao:"Ibram DF (Brasília Ambiental)",esfera:"Estadual",cidade:"Brasília",cargo:"Analista de Atividades do Meio Ambiente e Técnico de Atividades do Meio Ambiente",nivel:["Médio","Superior"],qa:"nao",areas:[],
+ formacao:"Analista: superior; Técnico: médio.",salario:"R$ 4.480 a R$ 9.074,82",sal:9074,vagas:"100 + cadastro reserva",
+ ini:"",fim:"",prova:"Edital previsto pro 1º semestre de 2027",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"A definir",local:"Brasília",lotacao:"Brasília/DF",ufs:["DF"],
+ conc:"Sem dado.",selo:"",aval:"Autorizado com comissão formada. Bom volume de vagas de analista.",
+ fonte:"https://blog.grancursosonline.com.br/concurso-ibram-df/",edital:""},
+{id:"tjdft-juiz",orgao:"TJDFT",esfera:"Estadual",cidade:"Brasília",cargo:"Juiz de Direito Substituto",nivel:["Superior"],qa:"nao",areas:[],
+ formacao:"Direito + 3 anos de atividade jurídica.",salario:"R$ 37.765,55",sal:37765,vagas:"20",
+ ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"Cebraspe",local:"Brasília",lotacao:"DF",ufs:["DF"],
+ conc:"Sem dado.",selo:"",aval:"Banca definida. Só pra carreira jurídica avançada.",
+ fonte:"https://blog.grancursosonline.com.br/concurso-tjdft-juiz/",edital:""},
+
+/* ===================== MUNICIPAIS: SP ===================== */
+{id:"iprem",orgao:"Iprem (Prefeitura de São Paulo)",esfera:"Municipal",cidade:"São Paulo",cargo:"APDO: Ciências Contábeis",nivel:["Superior"],qa:"nao",areas:[],
+ formacao:"Ciências Contábeis.",salario:"R$ 10.361,89",sal:10361,vagas:"9",
+ ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"A definir",local:"São Paulo",lotacao:"São Paulo (capital)",ufs:["SP"],
+ conc:"Sem dado.",selo:"",aval:"Autorizado. Só pra contadores. Na capital paulista, só os processos seletivos temporários da Prefeitura estão rodando agora.",
+ fonte:"https://folha.qconcursos.com/n/concursos-sao-paulo",edital:""},
+{id:"holambra",orgao:"Prefeitura de Holambra",esfera:"Municipal",cidade:"Holambra",cargo:"Técnico de Imobilização Ortopédica, Técnico RX, Auxiliar de Enfermagem, Agente de Trânsito, Fiscal de Obras, Fiscal de Posturas, Ouvidor, Secretária, Motoristas, Faxineira, Auxiliar Administrativo, Enfermeiro, Fisioterapeuta, Professores PTEB e outros",nivel:["Fundamental","Médio","Superior"],qa:"nao",areas:["pedagogia","imobilizacao","adm"],
+ formacao:"Varia por cargo.",salario:"R$ 1.915,95 a R$ 8.431,01",sal:8431,vagas:"18 imediatas + cadastro reserva em mais de 50 cargos",
+ ini:"2026-10-06",fim:"2026-11-05",prova:"29/11 (grupos A e B) e 06/12/2026 (C e D)",taxa:"R$ 16,98 (fundamental) / R$ 18,16 (médio, técnico e superior)",isencao:"Conforme o edital (a matéria não diz quem tem direito).",ie:"2026-10-06",ifm:"2026-10-11",
+ banca:"GL Consultoria",local:"Holambra e cidades vizinhas",lotacao:"Holambra (região de Campinas)",ufs:["SP"],
+ conc:"Sem dado.",selo:"",aval:"Taxa baratíssima (menos de R$ 20). Tem vaga de Técnico de Imobilização Ortopédica, mas só cadastro reserva e com prova prática.",
+ fonte:"https://www.pciconcursos.com.br/noticias/prefeitura-de-holambra-sp-abre-concurso-com-salarios-de-ate-8431",edital:"https://www.glconsultoria.com.br/"},
+{id:"suzano",orgao:"Prefeitura de Suzano",esfera:"Municipal",cidade:"Suzano",cargo:"Professor PEB I, Agente Escolar, Cozinheiro Escolar, Auxiliar de Atividades Escolares, Auxiliar de Secretaria, Secretário de Escola, Diretor de Escola, Médicos, Contador, Procurador",nivel:["Fundamental","Médio","Superior"],qa:"nao",areas:["pedagogia"],
+ formacao:"Fundamental, médio ou superior conforme o cargo.",salario:"R$ 2.105,38 a R$ 12.062,91",sal:12062,vagas:"73 + cadastro reserva",
+ ini:"2026-10-29",fim:"2026-11-25",prova:"13/12/2026",taxa:"R$ 60,93 (fundamental) / R$ 79,42 (médio) / R$ 106,62 (superior)",isencao:"Desempregados, quem ganha até 1 salário mínimo, e doadores regulares de sangue de Suzano.",ie:"2026-10-29",ifm:"2026-10-30",
+ banca:"Instituto Nosso Rumo",local:"Suzano",lotacao:"Suzano (Grande SP)",ufs:["SP"],
+ conc:"Sem dado.",selo:"",aval:"Bom volume de vagas de escola pra nível fundamental e médio.",
+ fonte:"https://www.pciconcursos.com.br/noticias/prefeitura-de-suzano-sp-abre-concurso-publico-com-salarios-de-ate-12062",edital:"https://www.nossorumo.org.br"},
+{id:"birigui",orgao:"Prefeitura de Birigui",esfera:"Municipal",cidade:"Birigui",cargo:"Auxiliar de Serviços Gerais, Enfermeiro ESF, Técnico em Enfermagem ESF, Coletor de Lixo, Farmacêutico, Motorista, Pedreiro, Oficial Administrativo, Recepcionista, Assistente Social, Instrutor de Corte e Costura, Fiscal de Tributos, Desenhista e outros",nivel:["Fundamental","Médio","Superior"],qa:"nao",areas:["farmacia","servico-social"],
+ formacao:"Varia por cargo.",salario:"R$ 1.621,05 a R$ 13.881,85 + vale-alimentação",sal:13881,vagas:"171 + cadastro reserva",
+ ini:"2026-10-22",fim:"2026-12-10",prova:"14/02/2027",taxa:"R$ 54 (fundamental) / R$ 56 (médio) / R$ 58 (superior)",isencao:"Doadores de sangue de Birigui, quem prestou serviço à Justiça Eleitoral e doadores de medula óssea.",ie:"2026-10-22",ifm:"2026-10-23",
+ banca:"Instituto Access",local:"Birigui",lotacao:"Birigui (interior de SP)",ufs:["SP"],
+ conc:"Sem dado.",selo:"",aval:"Muitas vagas operacionais e de saúde, taxa barata. Instrutor de Corte e Costura (cadastro reserva) combina com quem é de moda.",
+ fonte:"https://www.pciconcursos.com.br/noticias/prefeitura-de-birigui-sp-abre-concurso-publico-com-salarios-de-ate-13881",edital:""},
+{id:"leme",orgao:"Prefeitura de Leme",esfera:"Municipal",cidade:"Leme",cargo:"Fiscal de Rendas, Analista de TI, Técnico em Enfermagem, Técnico em Segurança do Trabalho, Topógrafo, Enfermeiro, Biólogo, Biomédico, Advogado do SUAS, Médicos, Oficiais de Manutenção (pedreiro, eletricista, encanador e outros)",nivel:["Fundamental","Médio","Superior"],qa:"nao",areas:[],
+ formacao:"Varia por cargo.",salario:"R$ 2.065,11 a R$ 13.359,44 + vale-alimentação de R$ 417,04",sal:13359,vagas:"29 + cadastro reserva",
+ ini:"2026-10-30",fim:"2026-11-30",prova:"20/12/2026",taxa:"R$ 32 a R$ 80",isencao:"Conforme o edital (a matéria não diz quem tem direito).",ie:"2026-10-30",ifm:"2026-11-04",
+ banca:"INDEPAC",local:"Ver edital",lotacao:"Leme (interior de SP)",ufs:["SP"],
+ conc:"Sem dado.",selo:"",aval:"Interior de SP, uma vaga por cargo.",
+ fonte:"https://www.pciconcursos.com.br/noticias/prefeitura-de-leme-sp-abre-concurso-publico-com-salarios-de-ate-13359",edital:"https://indepac.selecao.net.br"},
+{id:"matao",orgao:"Prefeitura de Matão",esfera:"Municipal",cidade:"Matão",cargo:"Analista Técnico Jurídico, Fiscal de Trânsito, Analista de Compras e Licitações, Pedreiro, Operadores de máquina, Fiscal de Obras, Fiscal de Saúde Pública, Desenhista Projetista, Arquivista, Bibliotecário, Educador Social, Gestor de Contratos, Procurador e outros",nivel:["Fundamental","Médio","Superior"],qa:"nao",areas:[],
+ formacao:"Varia por cargo.",salario:"Até R$ 9.717,96",sal:9717,vagas:"28 + cadastro reserva",
+ ini:"2026-10-17",fim:"2026-11-18",prova:"24/01/2027",taxa:"R$ 57,50 a R$ 119",isencao:"Desempregados, doadores de sangue, pessoas com deficiência e doadores de medula óssea.",ie:"2026-10-19",ifm:"2026-10-20",
+ banca:"IBAM",local:"Ver edital",lotacao:"Matão (interior de SP)",ufs:["SP"],
+ conc:"Sem dado.",selo:"",aval:"Interior de SP. Isenção ampla (inclui desempregados), mas o prazo já passou.",
+ fonte:"https://www.pciconcursos.com.br/noticias/prefeitura-de-matao-sp-abre-concurso-publico-com-salarios-de-ate-9717",edital:"https://www.ibamsp-concursos.org.br"},
+{id:"louveira",orgao:"Prefeitura de Louveira",esfera:"Municipal",cidade:"Louveira",cargo:"Escriturário, Professor de Ensino Básico, Professor de Artes, Professor de Educação Física, Professor de Inglês, Fiscal Municipal, Assistente Jurídico, Contador",nivel:["Fundamental","Médio","Superior"],qa:"nao",areas:["pedagogia"],
+ formacao:"Varia por cargo.",salario:"R$ 2.802 a R$ 8.738 + vale-alimentação de R$ 1.000",sal:8738,vagas:"19 + cadastro reserva",
+ ini:"2026-10-16",fim:"2026-11-16",prova:"17/01/2027 (geral) e 24/01/2027 (professores)",taxa:"R$ 58 (fundamental) / R$ 75 (médio) / R$ 95 (superior)",isencao:"CadÚnico com renda por pessoa até meio salário mínimo.",ifm:"2026-10-21",
+ banca:"Avança SP",local:"Ver edital",lotacao:"Louveira (região de Campinas)",ufs:["SP"],
+ conc:"Sem dado.",selo:"",aval:"Vale-alimentação de R$ 1.000 deixa o salário bem melhor. Bom pra Escriturário (nível médio).",
+ fonte:"https://www.pciconcursos.com.br/noticias/prefeitura-de-louveira-sp-abre-concursos-com-vagas-imediatas-e-cadastro-de-reserva",edital:""},
+{id:"jaborandi",orgao:"Prefeitura de Jaborandi",esfera:"Municipal",cidade:"Jaborandi",cargo:"Motorista, Agente de Desenvolvimento Infanto-Juvenil, Professor PEB I, Analista e Especialista de Gestão e Políticas Públicas, Técnico de Enfermagem, Agente Comunitário de Saúde e outros",nivel:["Fundamental","Médio","Superior"],qa:"nao",areas:["pedagogia"],
+ formacao:"Varia por cargo.",salario:"R$ 1.621 a R$ 5.325,60",sal:5325,vagas:"31 + cadastro reserva",
+ ini:"2026-10-07",fim:"2026-11-05",prova:"22/11/2026",taxa:"R$ 50 (fundamental) / R$ 70 (médio) / R$ 90 (superior)",isencao:"A matéria não diz quem tem direito.",ifm:"2026-10-12",
+ banca:"GL Consultoria",local:"Jaborandi",lotacao:"Jaborandi",ufs:["SP"],
+ conc:"Sem dado.",selo:"ruim",aval:"Cidade pequena e salários baixos.",
+ fonte:"https://concursos.estrategia.com/portal/concurso-prefeitura-de-jaborandi/",edital:""},
+{id:"lorena",orgao:"Prefeitura de Lorena",esfera:"Municipal",cidade:"Lorena",cargo:"Agente de Atendimento Especial, Tesoureiro, Médico Psiquiatra",nivel:["Médio","Superior"],qa:"nao",areas:[],
+ formacao:"Varia por cargo.",salario:"R$ 2.399,27 a R$ 8.890,46",sal:8890,vagas:"3 + cadastro reserva",
+ ini:"",fim:"2026-11-03",st:"aberto",prova:"Ver edital",taxa:"Ver edital",isencao:"A matéria não informa.",
+ banca:"Avança SP",local:"Lorena",lotacao:"Lorena (Vale do Paraíba)",ufs:["SP"],
+ conc:"Sem dado.",selo:"ruim",aval:"Só 3 vagas.",
+ fonte:"https://concursos.estrategia.com/portal/concurso-prefeitura-lorena/",edital:""},
+{id:"setec",orgao:"Setec Campinas",esfera:"Municipal",cidade:"Campinas",cargo:"Agente Administrativo, Agente de Apoio Operacional, Agente de Fiscalização, Agente Funerário, Agente de Suporte Técnico, Agente de Suporte Funerário, Motorista, Assistente de S.V.O., Analista de Informática, Procurador, Técnico em Segurança do Trabalho",nivel:["Fundamental","Médio","Superior"],qa:"nao",areas:["adm"],
+ formacao:"Varia por cargo.",salario:"R$ 2.571,28 a R$ 11.427,98 + vale-alimentação de R$ 2.150,12",sal:11427,vagas:"40 + cadastro reserva",
+ ini:"2026-09-08",fim:"2026-12-04",prova:"17/01/2027",taxa:"R$ 48 (fundamental) / R$ 55 (médio) / R$ 78 (superior)",isencao:"Doador de sangue (doação nos 6 meses antes do edital), doador de medula (REDOME) e CadÚnico com renda por pessoa até meio salário mínimo.",ie:"2026-09-08",ifm:"2026-09-18",
+ banca:"INDEPAC",local:"Campinas",lotacao:"Campinas",ufs:["SP"],
+ conc:"Sem dado.",selo:"vale",aval:"Vale-alimentação de R$ 2.150 por mês, o que faz o salário de nível médio passar de R$ 4.700.",
+ fonte:"https://blog.grancursosonline.com.br/concurso-setec-campinas-sp/",edital:"https://blog-static.infra.grancursosonline.com.br/wp-content/uploads/2026/08/28121148/Edital-01-SETEC-Campinas-SP-2026.pdf"},
+{id:"sarapui",orgao:"Prefeitura de Sarapuí",esfera:"Municipal",cidade:"Sarapuí",cargo:"Cargo administrativo de nível fundamental",nivel:["Fundamental"],qa:"nao",areas:[],
+ formacao:"Ensino fundamental.",salario:"R$ 2.097,40",sal:2097,vagas:"1 + cadastro reserva",
+ ini:"2026-10-28",fim:"2026-11-23",prova:"13/12/2026",taxa:"R$ 30,64",isencao:"A matéria não informa.",
+ banca:"Publiconsult",local:"Sarapuí",lotacao:"Sarapuí",ufs:["SP"],
+ conc:"Sem dado.",selo:"ruim",aval:"Uma vaga e salário baixo.",
+ fonte:"https://blog.grancursosonline.com.br/concurso-publico-28-outubro-2026/",edital:"https://blog-static.infra.grancursosonline.com.br/wp-content/uploads/2026/10/28121804/Edital-Sarapui-SP-2026-1.pdf"},
+{id:"altair",orgao:"Câmara de Altair",esfera:"Municipal",cidade:"Altair",cargo:"Cargos administrativos, de contabilidade e de controle",nivel:["Médio","Superior"],qa:"nao",areas:[],
+ formacao:"Varia por cargo.",salario:"R$ 2.800 a R$ 5.500",sal:5500,vagas:"2 + cadastro reserva",
+ ini:"2026-10-28",fim:"2026-11-11",prova:"06/12/2026",taxa:"R$ 60 a R$ 100",isencao:"A matéria não informa.",
+ banca:"CEMAT",local:"Altair",lotacao:"Altair",ufs:["SP"],
+ conc:"Sem dado.",selo:"ruim",aval:"Duas vagas numa cidade pequena.",
+ fonte:"https://blog.grancursosonline.com.br/concurso-publico-28-outubro-2026/",edital:"https://blog-static.infra.grancursosonline.com.br/wp-content/uploads/2026/10/28122056/Edital-Camara-Altair-SP-2026.pdf"},
+
+/* ===================== MUNICIPAIS: RJ ===================== */
+{id:"queimados",orgao:"Prefeitura de Queimados",esfera:"Municipal",cidade:"Queimados",cargo:"Técnico em Aparelho Gessado, Monitor de Alunos, Agente de Apoio à Inclusão, Agente Administrativo, Psicólogo, Cuidador de Residência Terapêutica, Técnico de Enfermagem, Técnico de Laboratório, Enfermeiro, Técnico em Raio-X, Assistente Social, Agente Fazendário, Agente Fiscal, Médicos e outros",nivel:["Médio","Superior"],qa:"parcial",areas:["servico-social","adm","imobilizacao"],
+ formacao:"Agente Fiscal e Agente Fazendário: graduação em qualquer área. Demais: específica.",salario:"R$ 1.621 a R$ 11.567,11",sal:11567,vagas:"463 imediatas (267 médio, 196 superior) + cadastro reserva",
+ ini:"2026-09-09",fim:"2026-11-03",prova:"20/11 e 22/11/2026",taxa:"R$ 120 a R$ 180",isencao:"Conforme o edital (as matérias não dizem quem tem direito).",ie:"2026-09-09",ifm:"2026-09-11",
+ banca:"IAN",local:"Queimados (e cidades vizinhas se precisar)",lotacao:"Queimados (Baixada Fluminense)",ufs:["RJ"],
+ conc:"Sem dado.",selo:"vale",aval:"Muitas vagas imediatas na Baixada. Tem 10 vagas de Técnico em Aparelho Gessado (imobilização ortopédica) e cargos fiscais pra qualquer graduação. Atenção: o PCI dá fim das inscrições em 13/10; o Estratégia (matéria mais recente) diz que foi prorrogado até 03/11. Confira no site do IAN.",
+ fonte:"https://www.pciconcursos.com.br/noticias/prefeitura-de-queimados-rj-abre-concurso-publico-com-salarios-de-ate-11567",edital:""},
+{id:"gcm-sg",orgao:"Prefeitura de São Gonçalo",esfera:"Municipal",cidade:"São Gonçalo",cargo:"Guarda Municipal Nível II e Guarda Municipal Psicólogo",nivel:["Médio","Superior"],qa:"nao",areas:[],
+ formacao:"Guarda: ensino médio. Psicólogo: Psicologia.",salario:"R$ 3.172,96 (guarda) / R$ 4.535,54 (psicólogo)",sal:4535,vagas:"101 + cadastro reserva",
+ ini:"2026-09-28",fim:"2026-11-18",prova:"24/01/2027",taxa:"R$ 95,18 (guarda) / R$ 136,06 (psicólogo)",isencao:"CadÚnico, doadores regulares de sangue e doadoras de leite materno (período não informado na matéria).",
+ banca:"Selecon",local:"São Gonçalo, Niterói ou Rio de Janeiro (você escolhe)",lotacao:"São Gonçalo",ufs:["RJ"],
+ conc:"Sem dado.",selo:"",aval:"Muitas vagas de nível médio, com prova que pode ser feita em São Gonçalo, Niterói ou no Rio. Tem curso de formação e teste físico.",
+ fonte:"https://www.pciconcursos.com.br/noticias/prefeitura-de-sao-goncalo-rj-abre-concursos-para-guardas-municipais",edital:"https://selecon.org.br"},
+
+/* ===================== MUNICIPAIS: MG ===================== */
+{id:"smed-bh",orgao:"Prefeitura de BH (Educação)",esfera:"Municipal",cidade:"Belo Horizonte",cargo:"Professor Municipal: 1º e 2º ciclos, Matemática, Educação Física, Geografia, Inglês",nivel:["Superior"],qa:"nao",areas:["pedagogia"],
+ formacao:"Licenciatura na disciplina, ou Pedagogia/Normal Superior. Precisa ter feito a Prova Nacional Docente 2026.",salario:"R$ 3.660,96",sal:3660,vagas:"112",
+ ini:"2026-12-21",fim:"2027-01-19",prova:"Usa a nota da Prova Nacional Docente 2026",taxa:"Gratuita",isencao:"Não precisa: inscrição gratuita.",lido:true,
+ banca:"Própria (SMED)",local:"Sem prova própria",lotacao:"Belo Horizonte",ufs:["MG"],
+ conc:"2023 (FGV): sem número de inscritos.",selo:"",aval:"Só serve pra quem fez a PND 2026 e tem licenciatura. Sem taxa.",
+ fonte:"https://blog.grancursosonline.com.br/concurso-smed-bh/",edital:"https://blog-static.infra.grancursosonline.com.br/wp-content/uploads/2026/06/15152035/Edital-SMED-BH-2026.pdf"},
+{id:"contagem",orgao:"Prefeitura de Contagem",esfera:"Municipal",cidade:"Contagem",cargo:"Assistente Administrativo, Fiscal de Atividades Urbanas, Engenheiro Civil, Arquiteto, Biólogo, Assistente Social, Psicólogo, Geógrafo, Técnico Superior em Gestão Pública Municipal, Jornalista, Publicitário, Relações Públicas, Analista de TI e outros",nivel:["Médio","Superior"],qa:"nao",areas:["comunicacao","servico-social","adm"],
+ formacao:"Varia por cargo.",salario:"R$ 2.698,73 a R$ 13.305,57 + auxílio-alimentação",sal:13305,vagas:"272",
+ ini:"2026-10-19",fim:"2026-11-17",prova:"24/01/2027",taxa:"R$ 70 (médio e técnico) / R$ 100 (superior)",isencao:"Conforme o edital (a matéria não diz quem tem direito).",ie:"2026-10-19",ifm:"2026-10-21",
+ banca:"IBGP",local:"Contagem e cidades vizinhas",lotacao:"Contagem (Grande BH)",ufs:["MG"],
+ conc:"Sem dado.",selo:"vale",aval:"150 vagas de Assistente Administrativo (nível médio). Uma das maiores ofertas de nível médio na lista.",
+ fonte:"https://www.pciconcursos.com.br/noticias/prefeitura-de-contagem-mg-abre-concurso-publico-com-salarios-de-ate-13305",edital:"https://www.ibgpconcursos.com.br"},
+{id:"sjdr",orgao:"Prefeitura de São João del Rei",esfera:"Municipal",cidade:"São João del Rei",cargo:"Enfermeiro, Médicos ESF e especialistas, Odontólogos, Técnico em Enfermagem, Fiscal Tributário, Agente Fiscal de Tributos, Agente de Fiscalização, Técnico em Radiologia, Intérprete de Libras, Historiador, Museólogo, Turismólogo e outros",nivel:["Médio","Superior"],qa:"nao",areas:[],
+ formacao:"Específica por cargo.",salario:"R$ 1.603,82 a R$ 15.164,56",sal:15164,vagas:"74 neste edital (há outros editais com ACS, professores e guarda)",
+ ini:"2026-10-13",fim:"2026-11-12",prova:"13/12/2026",taxa:"R$ 80 (médio e técnico) / R$ 100 (superior)",isencao:"Conforme o edital (a matéria não diz quem tem direito).",ie:"2026-10-13",ifm:"2026-10-15",
+ banca:"IBGP",local:"Ver edital",lotacao:"São João del Rei",ufs:["MG"],
+ conc:"Sem dado.",selo:"",aval:"Forte em saúde. Tem cargos de cultura (Museólogo, Historiador, Turismólogo).",
+ fonte:"https://www.pciconcursos.com.br/noticias/prefeitura-de-sao-joao-del-rei-mg-abre-concurso-publico-com-salarios-de-ate-15164",edital:"https://www.ibgpconcursos.com.br"},
+{id:"lagoaprata",orgao:"Prefeitura de Lagoa da Prata",esfera:"Municipal",cidade:"Lagoa da Prata",cargo:"Técnico em Enfermagem, Oficial de Serviços Administrativos, Auxiliar de Serviços Administrativos, Agente de Serviços Administrativos, Assistente Administrativo, Enfermeiro, Psicólogo, Odontólogo, Médico, Agente Fiscal, Advogado, Arquiteto, Bibliotecário e outros",nivel:["Fundamental","Médio","Superior"],qa:"nao",areas:["adm"],
+ formacao:"Varia por cargo.",salario:"Até R$ 21.489,70",sal:21489,vagas:"105",
+ ini:"2026-10-05",fim:"2026-11-03",prova:"29/11/2026",taxa:"R$ 60 (fundamental) / R$ 80 (médio) / R$ 100 (superior)",isencao:"Conforme o edital (a matéria não diz quem tem direito).",ie:"2026-10-05",ifm:"2026-10-07",
+ banca:"IBGP",local:"Ver edital",lotacao:"Lagoa da Prata (centro-oeste de MG)",ufs:["MG"],
+ conc:"Sem dado.",selo:"",aval:"Muitas vagas administrativas de nível médio.",
+ fonte:"https://www.pciconcursos.com.br/noticias/prefeitura-de-lagoa-da-prata-mg-altera-periodo-de-inscricoes-do-concurso-publico-com-salarios-de-ate-21-mil",edital:"https://www.ibgpconcursos.com.br"},
+{id:"belovale",orgao:"Prefeitura de Belo Vale",esfera:"Municipal",cidade:"Belo Vale",cargo:"Motorista, Auxiliar de Serviços Gerais, Auxiliar Administrativo, Técnico de Enfermagem, Cantineiro, Coveiro, Atendente de Saúde, Cuidador Social, Enfermeiro, Fisioterapeuta, Atendente de Museu e outros",nivel:["Fundamental","Médio","Superior"],qa:"nao",areas:["adm"],
+ formacao:"Varia por cargo.",salario:"Até R$ 8.000",sal:8000,vagas:"179 + cadastro reserva",
+ ini:"2026-10-02",fim:"2026-11-03",prova:"13/12/2026",taxa:"R$ 50 (fundamental) / R$ 75 (médio) / R$ 120 (superior)",isencao:"Conforme o edital (a matéria não diz quem tem direito).",ie:"2026-10-02",ifm:"2026-10-06",
+ banca:"Instituto Consulplan",local:"Ver edital",lotacao:"Belo Vale (região de BH)",ufs:["MG"],
+ conc:"Sem dado.",selo:"",aval:"Muitas vagas pra uma cidade pequena.",
+ fonte:"https://www.pciconcursos.com.br/noticias/prefeitura-de-belo-vale-mg-abre-concurso-publico-com-diversas-vagas-e-salarios-de-ate-8000",edital:"https://institutoconsulplan.org.br"},
+{id:"alvinopolis",orgao:"Prefeitura de Alvinópolis",esfera:"Municipal",cidade:"Alvinópolis",cargo:"Professor, Profissional de Apoio, Faxineiro, Condutor de Veículos Pesados, Motorista, Técnico em Enfermagem, Enfermeiro ESF, Agente de Saúde, Oficial de Administração, Médico ESF, Dentista e outros",nivel:["Fundamental","Médio","Superior"],qa:"nao",areas:["pedagogia"],
+ formacao:"Varia por cargo.",salario:"Até R$ 17.954,23",sal:17954,vagas:"cerca de 172 + cadastro reserva",
+ ini:"2026-11-16",fim:"2026-12-15",prova:"24/01/2027",taxa:"R$ 70 (fundamental) / R$ 100 (médio) / R$ 130 (superior)",isencao:"Conforme o edital (a matéria não diz quem tem direito).",ie:"2026-11-16",ifm:"2026-11-18",
+ banca:"Instituto Consulplan",local:"Ver edital",lotacao:"Alvinópolis",ufs:["MG"],
+ conc:"Sem dado.",selo:"",aval:"Interior de MG, bom número de vagas.",
+ fonte:"https://www.pciconcursos.com.br/noticias/prefeitura-de-alvinopolis-mg-publica-edital-de-concurso-publico-com-salarios-de-ate-17954",edital:"https://institutoconsulplan.org.br"},
+{id:"patis",orgao:"Prefeitura de Patis",esfera:"Municipal",cidade:"Patis",cargo:"Professor de 1ª a 5ª, Assistente de Educação, Auxiliar de Serviços da Educação, Motorista, Enfermeiro, Técnico em Enfermagem, Fiscal Sanitário, Médico ESF, Assistente Social, Auxiliar em Saúde Bucal e outros",nivel:["Fundamental","Médio","Superior"],qa:"nao",areas:["pedagogia","servico-social"],
+ formacao:"Varia por cargo.",salario:"R$ 1.621 a R$ 13.500",sal:13500,vagas:"154 + cadastro reserva",
+ ini:"2026-12-03",fim:"2026-12-30",prova:"31/01/2027",taxa:"R$ 65 a R$ 100",isencao:"Hipossuficiência financeira, desempregados, doadores de medula (REDOME) e CadÚnico.",ie:"2026-11-30",ifm:"2026-12-02",lido:true,
+ banca:"COTEC/Fadenor",local:"Patis",lotacao:"Patis (norte de MG)",ufs:["MG"],
+ conc:"Sem dado.",selo:"",aval:"Norte de MG, bom volume de vagas na educação.",
+ fonte:"https://blog.grancursosonline.com.br/concurso-patis-mg/",edital:"https://blog-static.infra.grancursosonline.com.br/wp-content/uploads/2026/09/28150905/Edital-Patis-MG-2026.pdf"},
+{id:"cam-serranos",orgao:"Câmara de Serranos",esfera:"Municipal",cidade:"Serranos",cargo:"Agente Administrativo, Auxiliar Técnico Legislativo, Contador",nivel:["Médio","Superior"],qa:"nao",areas:["adm"],
+ formacao:"Médio; Contador exige Contabilidade e registro.",salario:"R$ 1.714,44 a R$ 3.280,60",sal:3280,vagas:"3 + cadastro reserva",
+ ini:"2026-12-01",fim:"2027-01-04",prova:"17/01/2027",taxa:"R$ 100 (médio) / R$ 140 (Contador)",isencao:"CadÚnico com renda por pessoa até meio salário mínimo e doadores de medula óssea.",ie:"2026-12-01",ifm:"2026-12-03",lido:true,
+ banca:"Instituto DOM",local:"Ver edital",lotacao:"Serranos",ufs:["MG"],
+ conc:"Sem dado.",selo:"ruim",aval:"Taxa alta pra salário baixo e só 3 vagas.",
+ fonte:"https://blog.grancursosonline.com.br/concurso-camara-serranos-mg/",edital:"https://blog-static.infra.grancursosonline.com.br/wp-content/uploads/2026/09/30142527/Edital-Camara-Serranos-MG-2026.pdf"}
+];
+
+const SELO = {"vale":"Vale a pena","ruim":"Pouco atrativo","temp":"Temporário"};
+const UFS = [["RJ","Rio de Janeiro"],["SP","São Paulo"],["MG","Minas Gerais"],["DF","Distrito Federal"],["OUT","Outros estados"]];
+const ESF = ["Federal","Estadual","Municipal"];
+const ESF_LABEL = {"Federal":"Federal","Estadual":"Estadual / Distrital","Municipal":"Municipal"};
+const NIV = ["Fundamental","Médio","Superior"];
+const STS = [["aberto","Inscrições abertas"],["publicado","Edital publicado"],["previsto","Previsto"]];
+const MARCAS = [["interesse","Tenho interesse"],["inscrita","Me inscrevi"],["nao","Não serve pra mim"]];
+const MOSTRAR = [["sem","Sem marcação"],["interesse","Tenho interesse"],["inscrita","Me inscrevi"],["nao","Não serve"]];
+const TIT = [["sim","Tem prova de títulos"],["nao","Não tem"],["","Não informado"]];
+const AREAS = [["qualquer","Qualquer cargo (aceita qualquer graduação)"],["comunicacao","Comunicação / Jornalismo"],["pedagogia","Pedagogia"],["farmacia","Farmácia"],["imobilizacao","Técnico em Imobilizações / Gesso"],["servico-social","Serviço Social"],["quimica","Técnico em Química"],["adm","Agente / Assistente Administrativo"]];
+
+const today = new Date(); today.setHours(0,0,0,0);
+const parse = s => { if(!s) return null; const [y,m,d]=s.split("-").map(Number); return new Date(y,m-1,d); };
+const br = s => { const d=parse(s); return d? d.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric"}):""; };
+const ddmm = s => br(s).slice(0,5);
+const days = d => Math.round((d-today)/86400000);
+const iso = d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const TODAY = iso(today);
+D.forEach(c=>{ c.add=c.add||BASE_DATE; c.tit=c.tit||""; c.areas=c.areas||[]; });
+
+function status(c){
+  const i=parse(c.ini), f=parse(c.fim);
+  if(f && f<today) return "encerrado";
+  if(c.st) return c.st;
+  if(!f && !i) return "previsto";
+  if(i && i>today) return "publicado";
+  return "aberto";
+}
+function isenStatus(c){
+  if(!c.ifm) return null;
+  const a=parse(c.ie), f=parse(c.ifm);
+  const de = c.ie ? "de "+ddmm(c.ie)+" a "+ddmm(c.ifm) : "até "+ddmm(c.ifm);
+  if(f<today) return {txt:"Pedido de isenção foi "+de+" (encerrado)",ended:true};
+  if(a && a>today) return {txt:"Pedido de isenção "+de,open:false};
+  return {txt:"Pedido de isenção aberto até "+ddmm(c.ifm),open:true,days:days(f)};
+}
+
+/* ---------- filtros e marcações salvos neste navegador ---------- */
+const ls = {get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}};
+const defaultsFiltro = () => ({uf:UFS.map(u=>u[0]),esfera:[...ESF],nivel:[...NIV],status:STS.map(s=>s[0]),mostrar:["sem","interesse","inscrita"],tit:TIT.map(t=>t[0]),areas:[],busca:"",ordem:"prazo"});
+let store = ls.get("radar-perfis",null) || {atual:"Eu",perfis:{"Eu":{filtros:defaultsFiltro(),marcas:{}}}};
+function P(){ return store.perfis[store.atual]; }
+function salvar(){ ls.set("radar-perfis",store); }
+Object.values(store.perfis).forEach(p=>{ if(!p.filtros.tit) p.filtros.tit=TIT.map(t=>t[0]); if(!p.filtros.areas) p.filtros.areas=[]; });
+/* "Novo" compara com a rodada de atualização anterior (PREV_DATE), não com a última
+   visita de cada pessoa: assim todo mundo vê o mesmo "Novo" depois de cada segunda. */
+const isNew = c => c.add > PREV_DATE;
+const marca = c => P().marcas[c.id] || "";
+
+/* ---------- filtros ---------- */
+function F(){ return P().filtros; }
+function chips(el,key,items,labels){
+  el.innerHTML="";
+  items.forEach(it=>{
+    const [val,label] = Array.isArray(it)?it:[it,(labels&&labels[it])||it];
+    const b=document.createElement("button"); b.type="button"; b.className="chip"; b.textContent=label;
+    b.setAttribute("aria-pressed",F()[key].includes(val));
+    b.onclick=()=>{ const a=F()[key]; const i=a.indexOf(val); i>=0?a.splice(i,1):a.push(val); b.setAttribute("aria-pressed",i<0); salvar(); render(); };
+    el.appendChild(b);
+  });
+}
+function buildFilters(){
+  chips(document.getElementById("f-uf"),"uf",UFS);
+  chips(document.getElementById("f-esfera"),"esfera",ESF,ESF_LABEL);
+  chips(document.getElementById("f-nivel"),"nivel",NIV);
+  chips(document.getElementById("f-status"),"status",STS);
+  chips(document.getElementById("f-mostrar"),"mostrar",MOSTRAR);
+  chips(document.getElementById("f-tit"),"tit",TIT);
+  chips(document.getElementById("f-areas"),"areas",AREAS);
+  document.getElementById("busca").value=F().busca;
+  document.getElementById("ordem").value=F().ordem;
+}
+document.getElementById("busca").oninput=e=>{F().busca=e.target.value;salvar();render();};
+document.getElementById("ordem").onchange=e=>{F().ordem=e.target.value;salvar();render();};
+document.getElementById("limpar").onclick=()=>{P().filtros=defaultsFiltro();salvar();buildFilters();render();};
+
+const esc = s => String(s??"").replace(/[&<>"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
+const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+const slug = s => norm(s).replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+
+function prazoTxt(c,st){
+  if(st==="previsto") return ["Sem data ainda",false];
+  if(st==="publicado") return [c.ini?"Inscrição abre "+ddmm(c.ini):"Datas no edital",false];
+  const n=days(parse(c.fim));
+  if(n===0) return ["Fecha hoje",true];
+  if(n===1) return ["Fecha amanhã",true];
+  return ["Fecha em "+n+" dias ("+ddmm(c.fim)+")",n<=7];
+}
+
+function render(){
+  const f=F(); const q=norm(f.busca.trim());
+  const all=D.map(c=>({c,st:status(c)})).filter(r=>r.st!=="encerrado");
+  let rows=all.filter(({c,st})=>
+    f.status.includes(st) && f.esfera.includes(c.esfera) &&
+    c.nivel.some(n=>f.nivel.includes(n)) && c.ufs.some(u=>f.uf.includes(u)) &&
+    f.mostrar.includes(marca(c)||"sem") && f.tit.includes(c.tit) &&
+    (!f.areas.length || f.areas.some(a=>a==="qualquer"?c.qa==="sim":c.areas.includes(a))) &&
+    (!q || norm([c.orgao,c.cargo,c.cidade,c.banca,c.formacao].join(" ")).includes(q)));
+  const key = ({c,st}) => st==="aberto"?days(parse(c.fim)):st==="publicado"?1000+(c.ini?days(parse(c.ini)):500):5000;
+  const rank = (c,first) => c.selo===first?0:(c.selo?1:2);
+  rows.sort((a,b)=>key(a)-key(b));
+  if(f.ordem==="salario") rows.sort((a,b)=>b.c.sal-a.c.sal);
+  if(f.ordem==="vale") rows.sort((a,b)=>rank(a.c,"vale")-rank(b.c,"vale")||key(a)-key(b));
+  if(f.ordem==="ruim") rows.sort((a,b)=>rank(a.c,"ruim")-rank(b.c,"ruim")||key(a)-key(b));
+
+  const cnt=s=>rows.filter(r=>r.st===s).length;
+  const semMarca=all.filter(r=>!marca(r.c)).length;
+  const novos=all.filter(r=>isNew(r.c)).length;
+  document.getElementById("summary").innerHTML=
+    `<span><b>${rows.length}</b> na lista</span><span><b>${cnt("aberto")}</b> com inscrição aberta</span><span><b>${cnt("publicado")}</b> com edital publicado</span><span><b>${cnt("previsto")}</b> previstos</span><span><b>${semMarca}</b> que você ainda não marcou</span>`+(novos?`<span class="newcount"><b>${novos}</b> novos nesta atualização</span>`:"");
+
+  const fecha=rows.filter(r=>r.st==="aberto"&&days(parse(r.c.fim))<=7);
+  const isen=rows.map(r=>({r,i:isenStatus(r.c)})).filter(x=>x.i&&x.i.open&&x.i.days<=7);
+  const u=document.getElementById("urgent");
+  const parts=[];
+  if(fecha.length) parts.push(`<div><strong>Inscrição fechando em até 7 dias:</strong> `+fecha.map(r=>`${esc(r.c.orgao)} (${ddmm(r.c.fim)})`).join(" · ")+`</div>`);
+  if(isen.length) parts.push(`<div><strong>Pedido de isenção fechando:</strong> `+isen.map(x=>`${esc(x.r.c.orgao)} (até ${ddmm(x.r.c.ifm)})`).join(" · ")+`</div>`);
+  u.hidden=!parts.length; u.innerHTML=parts.join("");
+
+  const list=document.getElementById("list");
+  if(!rows.length){
+    const pci = q ? `<div>Não achei "${esc(f.busca.trim())}" nos concursos abertos da base. Pra ver todos os concursos que já tiveram esse cargo, abra a lista do <a href="https://www.pciconcursos.com.br/vagas/${slug(f.busca.trim())}" target="_blank" rel="noopener">PCI Concursos</a> (inclui encerrados, confira as datas).</div>` : "";
+    list.innerHTML=`<div class="empty"><div>Nenhum concurso com esses filtros.</div>${pci}</div>`; return;
+  }
+  list.innerHTML=rows.map(({c,st})=>{
+    const [pz,hot]=prazoTxt(c,st);
+    const stLabel=STS.find(s=>s[0]===st)[1];
+    const insc = c.ini||c.fim ? `${c.ini?br(c.ini):"já aberta"} a ${c.fim?br(c.fim):"a definir"}` : (st==="publicado"?"Ver edital":"A definir");
+    const iS=isenStatus(c);
+    const isenTag = iS && !iS.ended ? `<span class="tag isen">${iS.open?"Isenção até "+ddmm(c.ifm):"Isenção a partir de "+ddmm(c.ie)}</span>` : "";
+    const m=marca(c);
+    const mTag = m ? `<span class="tag mk-${m}">${MARCAS.find(x=>x[0]===m)[1]}</span>` : "";
+    const novoTag = isNew(c) ? `<span class="tag novo">Novo</span>` : "";
+    const qaTag = c.qa==="sim" ? '<span class="tag qa">Aceita qualquer graduação</span>' : c.qa==="parcial" ? '<span class="tag qa">Alguns cargos aceitam qualquer graduação</span>' : "";
+    const titTag = c.tit==="sim" ? '<span class="tag tit">Tem prova de títulos</span>' : "";
+    const stamp = c.selo ? `<span class="stamp s-${c.selo}">${SELO[c.selo]}</span>` : "";
+    const links=[c.edital?`<a href="${esc(c.edital)}" target="_blank" rel="noopener">Edital / inscrição</a>`:"",`<a href="${esc(c.fonte)}" target="_blank" rel="noopener">Fonte da informação</a>`].join("");
+    const botoes=MARCAS.map(([v,l])=>`<button type="button" class="mkbtn" data-id="${c.id}" data-v="${v}" aria-pressed="${m===v}">${l}</button>`).join("");
+    return `<details class="card${m==="nao"?" dim":""}">
+      <summary>
+        <div class="top">
+          <p class="org">${esc(c.orgao)}</p>
+          <span class="cargo">${esc(c.cargo)}</span>
+          <div class="tags">
+            ${novoTag}${mTag}
+            <span class="tag st-${st}">${stLabel}</span>
+            <span class="tag">${ESF_LABEL[c.esfera]} · ${esc(c.cidade)}</span>
+            <span class="tag">${c.nivel.join(" · ")}</span>
+            ${qaTag}${titTag}${isenTag}
+          </div>
+        </div>
+        <div class="right">
+          ${stamp}
+          <span class="sal">${esc(c.salario)}</span>
+          <span class="prazo${hot?" hot":""}">${pz}</span>
+        </div>
+      </summary>
+      <div class="body">
+        <div class="marks" role="group" aria-label="Minha marcação">${botoes}</div>
+        <div class="aval"><strong>Avaliação:</strong> ${esc(c.aval)}</div>
+        <dl>
+          <div><dt>Formação exigida</dt><dd>${esc(c.formacao)}</dd></div>
+          <div><dt>Prova de títulos</dt><dd>${c.tit==="sim"?"Sim":c.tit==="nao"?"Não":"Não informado ainda"}</dd></div>
+          <div><dt>Vagas</dt><dd>${esc(c.vagas)}</dd></div>
+          <div><dt>Inscrições</dt><dd>${insc}</dd></div>
+          <div><dt>Prova</dt><dd>${esc(c.prova)}</dd></div>
+          <div><dt>Taxa</dt><dd>${esc(c.taxa)}</dd></div>
+          <div><dt>Isenção</dt><dd>${iS?`<strong>${esc(iS.txt)}.</strong> `:""}${esc(c.isencao)}<br><small>${c.lido?"Conferido no edital":"Segundo a matéria"}</small></dd></div>
+          <div><dt>Banca</dt><dd>${esc(c.banca)}</dd></div>
+          <div><dt>Local da prova</dt><dd>${esc(c.local)}</dd></div>
+          <div><dt>Lotação</dt><dd>${esc(c.lotacao)}</dd></div>
+          <div><dt>Concorrência anterior</dt><dd>${esc(c.conc)}</dd></div>
+        </dl>
+        <div class="links">${links}</div>
+      </div>
+    </details>`;
+  }).join("");
+  list.querySelectorAll(".mkbtn").forEach(b=>b.onclick=()=>{
+    const id=b.dataset.id, v=b.dataset.v, mk=P().marcas;
+    if(mk[id]===v) delete mk[id]; else mk[id]=v;
+    salvar();
+    const card=b.closest("details");
+    card.querySelectorAll(".mkbtn").forEach(x=>x.setAttribute("aria-pressed",mk[id]===x.dataset.v));
+    card.classList.toggle("dim",mk[id]==="nao");
+    const tags=card.querySelector(".tags"); const old=tags.querySelector("[class*='mk-']"); if(old) old.remove();
+    if(mk[id]){ const t=document.createElement("span"); t.className="tag mk-"+mk[id]; t.textContent=MARCAS.find(x=>x[0]===mk[id])[1]; tags.prepend(t); }
+  });
+}
+buildFilters(); render();
+</script>
