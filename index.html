@@ -571,7 +571,7 @@ const ddmm = s => br(s).slice(0,5);
 const days = d => Math.round((d-today)/86400000);
 const iso = d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 const TODAY = iso(today);
-D.forEach(c=>{ c.add=c.add||BASE_DATE; c.tit=c.tit||""; c.areas=c.areas||[]; });
+D.forEach(c=>{ c.add=c.add||"2026-10-30"; c.tit=c.tit||""; c.areas=c.areas||[]; });
 
 function status(c){
   const i=parse(c.ini), f=parse(c.fim);
