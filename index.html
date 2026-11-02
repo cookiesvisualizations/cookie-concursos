@@ -107,7 +107,7 @@ footer{font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);padd
       <img class="logo" src="logo.jpg" alt="Cookie, a cachorrinha, mascote do Cookie Concursos">
       <h1>Cookie Concursos</h1>
     </div>
-    <div class="meta">Base conferida em <b>30/10/2026</b><br>Atualiza toda segunda</div>
+    <div class="meta">Base conferida em <b>02/11/2026</b><br>Atualiza toda segunda</div>
   </header>
 
   <section class="filters" aria-label="Filtros">
@@ -147,7 +147,7 @@ footer{font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);padd
 </div>
 
 <script>
-const BASE_DATE="2026-10-30";
+const BASE_DATE="2026-11-02";
 /* PREV_DATE marca a rodada de atualização anterior. Na próxima segunda, antes de
    atualizar a base, troque PREV_DATE pelo BASE_DATE atual (e aí sim atualize o BASE_DATE
    pra data nova). Assim "Novo" mostra só quem entrou na rodada mais recente, não quem
@@ -253,10 +253,17 @@ const D = [
  conc:"Sem dado no recorte.",selo:"",aval:"Autorizado, banca FCC. Lotação no MT.",
  fonte:"https://folha.qconcursos.com/n/concursos-federais",edital:""},
 
+{id:"cofen",add:"2026-11-02",orgao:"Cofen (Conselho Federal de Enfermagem)",esfera:"Federal",cidade:"Brasília",cargo:"Advogado, Arquivista, Analista Técnico, Analista de TI, Enfermeiro, Enfermeiro Fiscal e, só cadastro reserva, Analista de Comunicação II, Analista de Gestão de Pessoas, Bibliotecário, Contador e outros",nivel:["Superior"],qa:"nao",areas:["comunicacao"],
+ formacao:"Superior na área do cargo.",salario:"R$ 18.950,52",sal:18950,vagas:"16 imediatas + cadastro reserva",
+ ini:"",fim:"",prova:"A definir (objetiva, discursiva e títulos)",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"Instituto Quadrix",local:"A definir",lotacao:"Brasília/DF",ufs:["DF"],
+ conc:"Sem dado.",selo:"",
+ aval:"Salário altíssimo pra conselho profissional, com vaga de Analista de Comunicação, mas só em cadastro reserva. O edital é dado como iminente desde o começo do ano, então pode demorar.",
+ fonte:"https://folha.qconcursos.com/n/concurso-cofen-2026-pagina-criada",edital:""},
 /* ===================== SP ESTADUAL ===================== */
 {id:"sefaz-sp",orgao:"Sefaz SP",esfera:"Estadual",cidade:"São Paulo",cargo:"Analista em Planejamento, Orçamento e Finanças Públicas (APOFP): Orçamento e Finanças, Contabilidade Pública, Ciência de Dados/TI",nivel:["Superior"],qa:"sim",areas:[],
  formacao:"Superior completo em qualquer área.",salario:"R$ 11.359,50 (com prêmio máximo)",sal:11359,vagas:"60 imediatas",
- ini:"2026-10-05",fim:"2026-11-03",prova:"13/12/2026 (a Folha diz 20/12: conferir)",taxa:"R$ 150",isencao:"Doador de sangue (isenção); estudante com renda menor que 2 salários mínimos ou desempregado (redução de 50%).",ie:"2026-10-05",ifm:"2026-10-09",
+ ini:"2026-10-05",fim:"2026-11-03",prova:"20/12/2026 (remarcada; antes era 13/12)",taxa:"R$ 150",isencao:"Doador de sangue (isenção); estudante com renda menor que 2 salários mínimos ou desempregado (redução de 50%).",ie:"2026-10-05",ifm:"2026-10-09",
  banca:"FCC",local:"São Paulo (capital)",lotacao:"São Paulo",ufs:["SP"],
  conc:"Último em 2013 (Vunesp): sem número de inscritos.",selo:"",
  aval:"Boa carreira e aceita qualquer área, mas cobra AFO, contabilidade e direito financeiro, com discursiva e corte alto. Difícil começando do zero.",
@@ -271,9 +278,9 @@ const D = [
 {id:"tjsp-esc",orgao:"TJ SP",esfera:"Estadual",cidade:"Estado de SP",cargo:"Escrevente Técnico Judiciário",nivel:["Médio"],qa:"sim",areas:[],
  formacao:"Ensino médio completo.",salario:"R$ 6.782,54 + auxílios",sal:6782,vagas:"Só cadastro reserva",
  ini:"2026-10-28",fim:"2026-12-10",prova:"14/03/2027",taxa:"R$ 81",isencao:"Redução de 50% pra estudante com renda menor que 2 salários mínimos ou desempregado.",ie:"2026-10-28",ifm:"2026-10-30",
- banca:"Vunesp",local:"Estado de SP",lotacao:"Comarcas de SP",ufs:["SP"],
+ banca:"Vunesp",local:"Estado de SP",lotacao:"50 circunscrições do interior (2ª a 10ª RAJ). Capital e Grande SP ficam de fora; a escolha na inscrição não pode ser trocada.",ufs:["SP"],
  conc:"Historicamente muito concorrido (dezenas de milhares de inscritos).",selo:"vale",
- aval:"Um dos melhores salários de nível médio do estado. É só cadastro reserva, mas o TJ SP costuma chamar muita gente ao longo da validade.",
+ aval:"Um dos melhores salários de nível médio do estado. É só cadastro reserva e só no interior (sem capital nem Grande SP), mas o TJ SP costuma chamar muita gente ao longo da validade.",
  fonte:"https://www.pciconcursos.com.br/noticias/tjsp-abre-concursos-para-oficial-de-justica-e-escrevente-tecnico-judiciario",edital:"https://www.vunesp.com.br"},
 {id:"dpe-sp",orgao:"Defensoria Pública de SP",esfera:"Estadual",cidade:"São Paulo",cargo:"Defensor Público",nivel:["Superior"],qa:"nao",areas:[],
  formacao:"Bacharelado em Direito.",salario:"R$ 29.716",sal:29716,vagas:"70",
@@ -413,6 +420,27 @@ const D = [
  banca:"Cebraspe",local:"Brasília",lotacao:"DF",ufs:["DF"],
  conc:"Sem dado.",selo:"",aval:"Banca definida. Só pra carreira jurídica avançada.",
  fonte:"https://blog.grancursosonline.com.br/concurso-tjdft-juiz/",edital:""},
+{id:"sedf",add:"2026-11-02",orgao:"SEDF (Secretaria de Educação do DF)",esfera:"Estadual",cidade:"Brasília",cargo:"Professor de Educação Básica, Pedagogo-Orientador Educacional, Gestor em Políticas Públicas e Gestão Educacional, Analista em Políticas Públicas e Gestão Educacional (inclui Monitor)",nivel:["Superior"],qa:"nao",areas:["pedagogia"],tit:"sim",
+ formacao:"Superior; licenciatura ou Pedagogia conforme o cargo (detalhes no edital).",salario:"R$ 3.245,02 a R$ 6.106,11 (sobe com titulação)",sal:6106,vagas:"10.604 (2.650 imediatas + 7.954 cadastro reserva), sendo 200 de Pedagogo-Orientador",
+ ini:"",fim:"",prova:"A definir (objetiva certo/errado, discursiva, estudo de caso e títulos, segundo o termo de referência)",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"Instituto Quadrix (contrato assinado em 23/10)",local:"Brasília",lotacao:"Distrito Federal",ufs:["DF"],
+ conc:"2022 (Quadrix): 4.254 vagas.",selo:"vale",
+ aval:"Um dos maiores concursos de educação do país, com edital esperado pra novembro. Bom pra quem tem Pedagogia ou licenciatura. Contra: prova estilo certo/errado com desconto por erro.",
+ fonte:"https://folha.qconcursos.com/n/concurso-sedf-2026-banca-contratada",edital:""},
+{id:"gdf-plan",add:"2026-11-02",orgao:"GDF (Planejamento e Infraestrutura)",esfera:"Estadual",cidade:"Brasília",cargo:"Analista e Técnico de Planejamento e Infraestrutura",nivel:["Médio","Superior"],qa:"nao",areas:[],
+ formacao:"Técnico: nível médio. Analista: superior (especialidades no edital).",salario:"R$ 4.485 a R$ 12.040,73",sal:12040,vagas:"217 + cadastro reserva",
+ ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"Instituto Consulplan",local:"Brasília",lotacao:"Brasília/DF",ufs:["DF"],
+ conc:"Sem dado.",selo:"",
+ aval:"Banca definida e edital esperado em breve. Tem vaga de nível médio com salário acima de R$ 4 mil. As especialidades ainda não foram detalhadas.",
+ fonte:"https://blog.grancursosonline.com.br/concursos-distrito-federal-df/",edital:""},
+{id:"sefaz-df",add:"2026-11-02",orgao:"Sefaz DF",esfera:"Estadual",cidade:"Brasília",cargo:"Auditor Fiscal da Receita do DF",nivel:["Superior"],qa:"nao",areas:[],
+ formacao:"Superior (requisito exato sai no edital).",salario:"R$ 23.597,07 a cerca de R$ 29 mil (o Gran traz os dois valores)",sal:23597,vagas:"265",
+ ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"Cebraspe",local:"Brasília",lotacao:"Brasília/DF",ufs:["DF"],
+ conc:"Sem dado.",selo:"",
+ aval:"Banca definida e muitas vagas pra carreira fiscal de salário alto. Prova pesada de tributário e contabilidade. O Gran mostra dois salários diferentes na mesma página; conferir no edital.",
+ fonte:"https://blog.grancursosonline.com.br/concursos-distrito-federal-df/",edital:""},
 
 /* ===================== MUNICIPAIS: SP ===================== */
 {id:"iprem",orgao:"Iprem (Prefeitura de São Paulo)",esfera:"Municipal",cidade:"São Paulo",cargo:"APDO: Ciências Contábeis",nivel:["Superior"],qa:"nao",areas:[],
@@ -487,13 +515,34 @@ const D = [
  banca:"CEMAT",local:"Altair",lotacao:"Altair",ufs:["SP"],
  conc:"Sem dado.",selo:"ruim",aval:"Duas vagas numa cidade pequena.",
  fonte:"https://blog.grancursosonline.com.br/concurso-publico-28-outubro-2026/",edital:"https://blog-static.infra.grancursosonline.com.br/wp-content/uploads/2026/10/28122056/Edital-Camara-Altair-SP-2026.pdf"},
+{id:"campinas-pref",add:"2026-11-02",orgao:"Prefeitura de Campinas",esfera:"Municipal",cidade:"Campinas",cargo:"485 vagas em 15 editais: Especialista em Comunicação Social (Jornalismo e Publicidade), Agente Administrativo, Agente de Apoio à Saúde (Farmácia), Assistente Social, Coordenador e Orientador Pedagógico, Agente de Ação Cultural, Analista de TI e outros",nivel:["Fundamental","Médio","Superior"],qa:"nao",areas:["comunicacao","adm","farmacia","servico-social","pedagogia"],
+ formacao:"Varia por cargo. Agente Administrativo e Agente de Apoio (Farmácia): nível médio.",salario:"R$ 3.554,90 (Agente Administrativo) a R$ 9.844,33 (Coordenador Pedagógico)",sal:9844,vagas:"485 (Jornalismo 2, Publicidade 2, Agente Administrativo 20, Apoio Farmácia 20, Assistente Social 2)",
+ ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"FCC",local:"Campinas",lotacao:"Campinas",ufs:["SP"],
+ conc:"Sem dado.",selo:"",
+ aval:"Banca definida em 22/10, falta assinar o contrato. Concurso grande que bate com várias áreas da família (comunicação, administrativo, farmácia, serviço social). Contra: vagas de jornalismo são só 2.",
+ fonte:"https://folha.qconcursos.com/n/concurso-campinas-sp-2026-banca-definida",edital:""},
+{id:"juquia",add:"2026-11-02",orgao:"Prefeitura de Juquiá",esfera:"Municipal",cidade:"Juquiá",cargo:"Auxiliar Administrativo, Auxiliar de Farmácia, Auxiliar de Saúde Bucal, Cuidador Social, Fiscal de Obras, Analista Administrativo, Controlador Interno, Tesoureiro, Médicos, Engenheiros e outros",nivel:["Fundamental","Médio","Superior"],qa:"nao",areas:["adm"],
+ formacao:"Varia por cargo.",salario:"R$ 1.621,81 a R$ 8.653,17",sal:8653,vagas:"13 + cadastro reserva",
+ ini:"2026-10-27",fim:"2026-11-10",prova:"13/12/2026",taxa:"R$ 55 a R$ 100",isencao:"A matéria não informa.",
+ banca:"GL Consultoria",local:"Juquiá",lotacao:"Juquiá (Vale do Ribeira)",ufs:["SP"],
+ conc:"Sem dado.",selo:"ruim",
+ aval:"Poucas vagas numa cidade pequena do Vale do Ribeira. Só vale pra quem mora perto e quer cargo administrativo.",
+ fonte:"https://concursosnobrasil.com/concursos/sp/2026/10/28/concurso-prefeitura-de-juquia-sp-oferta-iniciais-de-ate-r-86-mil/",edital:"https://portal.glconsultoria.com.br/edital/ver/339"},
+{id:"cam-taboao",add:"2026-11-02",orgao:"Câmara de Taboão da Serra",esfera:"Municipal",cidade:"Taboão da Serra",cargo:"Jornalista",nivel:["Superior"],qa:"nao",areas:["comunicacao"],
+ formacao:"Jornalismo (a confirmar no edital).",salario:"R$ 8.750",sal:8750,vagas:"A definir",
+ ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"A escolher",local:"Taboão da Serra",lotacao:"Taboão da Serra (Grande SP)",ufs:["SP"],
+ conc:"Sem dado.",selo:"",
+ aval:"Autorizado, com vaga específica de Jornalista na Grande SP e salário bom pra área. Ainda sem banca.",
+ fonte:"https://concursos.estrategia.com/portal/concursos-comunicacao-social/",edital:""},
 
 /* ===================== MUNICIPAIS: RJ ===================== */
 {id:"queimados",orgao:"Prefeitura de Queimados",esfera:"Municipal",cidade:"Queimados",cargo:"Técnico em Aparelho Gessado, Monitor de Alunos, Agente de Apoio à Inclusão, Agente Administrativo, Psicólogo, Cuidador de Residência Terapêutica, Técnico de Enfermagem, Técnico de Laboratório, Enfermeiro, Técnico em Raio-X, Assistente Social, Agente Fazendário, Agente Fiscal, Médicos e outros",nivel:["Médio","Superior"],qa:"parcial",areas:["servico-social","adm","imobilizacao"],
  formacao:"Agente Fiscal e Agente Fazendário: graduação em qualquer área. Demais: específica.",salario:"R$ 1.621 a R$ 11.567,11",sal:11567,vagas:"463 imediatas (267 médio, 196 superior) + cadastro reserva",
  ini:"2026-09-09",fim:"2026-11-03",prova:"20/11 e 22/11/2026",taxa:"R$ 120 a R$ 180",isencao:"Conforme o edital (as matérias não dizem quem tem direito).",ie:"2026-09-09",ifm:"2026-09-11",
  banca:"IAN",local:"Queimados (e cidades vizinhas se precisar)",lotacao:"Queimados (Baixada Fluminense)",ufs:["RJ"],
- conc:"Sem dado.",selo:"vale",aval:"Muitas vagas imediatas na Baixada. Tem 10 vagas de Técnico em Aparelho Gessado (imobilização ortopédica) e cargos fiscais pra qualquer graduação. Atenção: o PCI dá fim das inscrições em 13/10; o Estratégia (matéria mais recente) diz que foi prorrogado até 03/11. Confira no site do IAN.",
+ conc:"Sem dado.",selo:"vale",aval:"Muitas vagas imediatas na Baixada. Tem 10 vagas de Técnico em Aparelho Gessado (imobilização ortopédica) e cargos fiscais pra qualquer graduação. Inscrições prorrogadas até 03/11 (confirmado pela Folha; o PCI ainda mostra 13/10), com pagamento da taxa até 04/11.",
  fonte:"https://www.pciconcursos.com.br/noticias/prefeitura-de-queimados-rj-abre-concurso-publico-com-salarios-de-ate-11567",edital:""},
 {id:"gcm-sg",orgao:"Prefeitura de São Gonçalo",esfera:"Municipal",cidade:"São Gonçalo",cargo:"Guarda Municipal Nível II e Guarda Municipal Psicólogo",nivel:["Médio","Superior"],qa:"nao",areas:[],
  formacao:"Guarda: ensino médio. Psicólogo: Psicologia.",salario:"R$ 3.172,96 (guarda) / R$ 4.535,54 (psicólogo)",sal:4535,vagas:"101 + cadastro reserva",
@@ -501,6 +550,13 @@ const D = [
  banca:"Selecon",local:"São Gonçalo, Niterói ou Rio de Janeiro (você escolhe)",lotacao:"São Gonçalo",ufs:["RJ"],
  conc:"Sem dado.",selo:"",aval:"Muitas vagas de nível médio, com prova que pode ser feita em São Gonçalo, Niterói ou no Rio. Tem curso de formação e teste físico.",
  fonte:"https://www.pciconcursos.com.br/noticias/prefeitura-de-sao-goncalo-rj-abre-concursos-para-guardas-municipais",edital:"https://selecon.org.br"},
+{id:"araruama",add:"2026-11-02",orgao:"Prefeitura de Araruama",esfera:"Municipal",cidade:"Araruama",cargo:"Oficial Administrativo I (130 vagas), Assistente Social (28), Farmacêutico II (5), Técnico de Aparelho Gessado (5), professores, Orientador Educacional, Auditor Fiscal Ambiental e outros",nivel:["Fundamental","Médio","Superior"],qa:"nao",areas:["adm","servico-social","farmacia","imobilizacao"],
+ formacao:"Varia por cargo.",salario:"R$ 1.621 a R$ 12.608",sal:12608,vagas:"1.978",
+ ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"A definir",local:"Araruama",lotacao:"Araruama (Região dos Lagos)",ufs:["RJ"],
+ conc:"Sem dado.",selo:"",
+ aval:"Lei autorizou quase 2 mil vagas, com Técnico de Aparelho Gessado, Farmacêutico, Assistente Social e 130 de Oficial Administrativo. Contra: ainda não tem banca nem data, e muitos salários devem ser baixos.",
+ fonte:"https://folha.qconcursos.com/n/concurso-araruama-rj-lei-autoriza-vagas-2026",edital:""},
 
 /* ===================== MUNICIPAIS: MG ===================== */
 {id:"smed-bh",orgao:"Prefeitura de BH (Educação)",esfera:"Municipal",cidade:"Belo Horizonte",cargo:"Professor Municipal: 1º e 2º ciclos, Matemática, Educação Física, Geografia, Inglês",nivel:["Superior"],qa:"nao",areas:["pedagogia"],
@@ -550,7 +606,28 @@ const D = [
  ini:"2026-12-01",fim:"2027-01-04",prova:"17/01/2027",taxa:"R$ 100 (médio) / R$ 140 (Contador)",isencao:"CadÚnico com renda por pessoa até meio salário mínimo e doadores de medula óssea.",ie:"2026-12-01",ifm:"2026-12-03",lido:true,
  banca:"Instituto DOM",local:"Ver edital",lotacao:"Serranos",ufs:["MG"],
  conc:"Sem dado.",selo:"ruim",aval:"Taxa alta pra salário baixo e só 3 vagas.",
- fonte:"https://blog.grancursosonline.com.br/concurso-camara-serranos-mg/",edital:"https://blog-static.infra.grancursosonline.com.br/wp-content/uploads/2026/09/30142527/Edital-Camara-Serranos-MG-2026.pdf"}
+ fonte:"https://blog.grancursosonline.com.br/concurso-camara-serranos-mg/",edital:"https://blog-static.infra.grancursosonline.com.br/wp-content/uploads/2026/09/30142527/Edital-Camara-Serranos-MG-2026.pdf"},
+{id:"conceicao-md",add:"2026-11-02",orgao:"Prefeitura de Conceição do Mato Dentro",esfera:"Municipal",cidade:"Conceição do Mato Dentro",cargo:"Pedagogo (15), Assistente Social (2), Auxiliar de Administração (20), Auxiliar de Creche (100), Professor PEB I (100), Secretário Escolar, Auditor Fiscal, Bibliotecário, Psicólogo e outros",nivel:["Médio","Superior"],qa:"nao",areas:["pedagogia","servico-social","adm"],
+ formacao:"Varia por cargo.",salario:"R$ 2.242,30 a R$ 6.727,07 (o Gran fala em até R$ 21.138,26)",sal:6727,vagas:"257 (o Gran fala em 264)",
+ ini:"2026-10-07",fim:"2026-11-06",prova:"13/12/2026",taxa:"R$ 70 (médio e técnico) / R$ 100 (superior)",isencao:"Conforme o edital (a matéria não diz quem tem direito).",ifm:"2026-10-09",
+ banca:"Fundep",local:"Conceição do Mato Dentro",lotacao:"Conceição do Mato Dentro (região central de MG)",ufs:["MG"],
+ conc:"Sem dado.",selo:"",
+ aval:"15 vagas de Pedagogo e muitas na educação, com banca séria (Fundep). Fecha dia 06/11. Folha e Gran divergem no total de vagas e no teto salarial.",
+ fonte:"https://folha.qconcursos.com/n/prefeitura-de-conceicao-do-mato-dentro-mg-retifica-concurso-e-mantem-257-vagas",edital:"https://www.gestaodeconcursos.com.br/"},
+{id:"paraguacu",add:"2026-11-02",orgao:"Prefeitura de Paraguaçu",esfera:"Municipal",cidade:"Paraguaçu",cargo:"Monitor de Transporte Escolar, Guarda Civil Municipal, Técnico de Enfermagem ESF, Educador, Auxiliar de Educador, Farmacêutico, Nutricionista, Enfermeiro ESF, Médicos, Assistente Social (cadastro reserva) e outros",nivel:["Fundamental","Médio","Superior"],qa:"nao",areas:["farmacia","servico-social"],
+ formacao:"Varia por cargo.",salario:"R$ 1.638,83 a R$ 20.128,27 + abono de R$ 100",sal:20128,vagas:"99 + cadastro reserva (a soma da tabela dá 100)",
+ ini:"2026-12-21",fim:"2027-01-19",prova:"28/02/2027",taxa:"R$ 80 (fundamental e médio) / R$ 150 (superior)",isencao:"Hipossuficiência, desemprego ou doação regular de sangue.",
+ banca:"IBDO Projetos",local:"Paraguaçu",lotacao:"Paraguaçu (sul de MG)",ufs:["MG"],
+ conc:"Sem dado.",selo:"",
+ aval:"Inscrição só em dezembro. Tem 1 vaga de Farmacêutico; Assistente Social é só cadastro reserva. Taxa de superior salgada.",
+ fonte:"https://folha.qconcursos.com/n/prefeitura-de-paraguacu-mg-abre-concurso-com-99-vagas",edital:"https://www.ibdoprojetos.org.br"},
+{id:"hosp-bocaiuva",add:"2026-11-02",orgao:"Hospital Municipal Dr. Gil Alves (Bocaiúva)",esfera:"Municipal",cidade:"Bocaiúva",cargo:"Farmacêutico Hospitalar (6), Assistente Social Hospitalar (1), Assistente Administrativo (5), Técnico de Enfermagem, Enfermeiro, Médico Clínico Geral e outros",nivel:["Fundamental","Médio","Superior"],qa:"nao",areas:["farmacia","servico-social","adm"],tit:"sim",
+ formacao:"Varia por cargo. Farmacêutico exige especialização em Farmácia Hospitalar ou residência.",salario:"R$ 1.621 a R$ 7.950 (Farmacêutico R$ 2.904,34)",sal:7950,vagas:"183 imediatas",
+ ini:"2026-11-27",fim:"2026-12-28",prova:"31/01/2027",taxa:"R$ 65 a R$ 95",isencao:"Hipossuficiência financeira, doador de medula óssea e CadÚnico.",ie:"2026-11-24",ifm:"2026-11-26",
+ banca:"COTEC/Fadenor",local:"Bocaiúva",lotacao:"Bocaiúva (norte de MG)",ufs:["MG"],
+ conc:"Sem dado.",selo:"ruim",
+ aval:"Bastante vaga, inclusive 6 de Farmacêutico, mas o salário de R$ 2,9 mil é baixo pra quem precisa ter especialização. Regime não informado na matéria.",
+ fonte:"https://blog.grancursosonline.com.br/concurso-hospital-bocaiuva-mg/",edital:"https://blog-static.infra.grancursosonline.com.br/wp-content/uploads/2026/09/18183713/Edital-Hospital-Gil-Alves-Bocaiuva-MG-2026.pdf"}
 ];
 
 const SELO = {"vale":"Vale a pena","ruim":"Pouco atrativo","temp":"Temporário"};
