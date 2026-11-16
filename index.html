@@ -107,7 +107,7 @@ footer{font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);padd
       <img class="logo" src="logo.jpg" alt="Cookie, a cachorrinha, mascote do Cookie Concursos">
       <h1>Cookie Concursos</h1>
     </div>
-    <div class="meta">Base conferida em <b>09/11/2026</b><br>Atualiza toda segunda</div>
+    <div class="meta">Base conferida em <b>16/11/2026</b><br>Atualiza toda segunda</div>
   </header>
 
   <section class="filters" aria-label="Filtros">
@@ -147,12 +147,12 @@ footer{font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);padd
 </div>
 
 <script>
-const BASE_DATE="2026-11-09";
+const BASE_DATE="2026-11-16";
 /* PREV_DATE marca a rodada de atualização anterior. Na próxima segunda, antes de
    atualizar a base, troque PREV_DATE pelo BASE_DATE atual (e aí sim atualize o BASE_DATE
    pra data nova). Assim "Novo" mostra só quem entrou na rodada mais recente, não quem
    mudou desde a última visita de cada pessoa. */
-const PREV_DATE="2026-11-02";
+const PREV_DATE="2026-11-09";
 const D = [
 /* ===================== FEDERAIS ===================== */
 {id:"camara-rr",orgao:"Câmara dos Deputados",esfera:"Federal",cidade:"Brasília",cargo:"Analista Legislativo: Registro e Redação",nivel:["Superior"],qa:"sim",areas:[],
@@ -222,10 +222,10 @@ const D = [
 {id:"bacen",orgao:"Banco Central",esfera:"Federal",cidade:"Brasília e regionais",cargo:"Técnico, Auditor e Procurador",nivel:["Médio","Superior"],qa:"nao",areas:[],
  formacao:"Técnico: nível médio. Procurador: Direito. Auditor: ver edital.",salario:"R$ 8.300 a R$ 27.264,30",sal:27264,vagas:"170",
  ini:"",fim:"",prova:"Prevista a partir de mar/2027",taxa:"A definir",isencao:"Sai no edital.",
- banca:"Em contratação",local:"A definir",lotacao:"Brasília e regionais (inclui RJ, SP, BH)",ufs:["DF","RJ","SP","MG","OUT"],
+ banca:"Em contratação (não confirmada oficialmente)",local:"A definir",lotacao:"Brasília e regionais (inclui RJ, SP, BH)",ufs:["DF","RJ","SP","MG","OUT"],
  conc:"Sem dado no recorte.",selo:"vale",
- aval:"Autorizado. As 50 vagas de Técnico (nível médio) são uma das melhores chances federais pra quem só tem médio.",
- fonte:"https://folha.qconcursos.com/n/concursos-federais",edital:""},
+ aval:"Autorizado, e o próprio Banco Central diz que o edital sai até 30/12/2026. São 50 vagas de Técnico (nível médio, R$ 8.300), uma das melhores chances federais pra quem só tem médio. Contra: banca ainda não confirmada.",
+ fonte:"https://blog.grancursosonline.com.br/concurso-bacen/",edital:""},
 {id:"anpd",orgao:"ANPD (Autoridade Nacional de Proteção de Dados)",esfera:"Federal",cidade:"Brasília",cargo:"Especialista em Regulação de Proteção de Dados",nivel:["Superior"],qa:"nao",areas:[],
  formacao:"Superior (requisito a definir no edital).",salario:"R$ 16.413,35",sal:16413,vagas:"50",
  ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
@@ -267,6 +267,27 @@ const D = [
  conc:"Sem dado.",selo:"temp",
  aval:"Temporário (contrato estimado em uns 6 meses) e parte do salário depende de produção, então a renda varia. Bom pra quem só tem fundamental e quer renda rápida perto de casa; MG tem muitas vagas, o DF quase nenhuma.",
  fonte:"https://www.direcaoconcursos.com.br/noticias/edital-completo-ibge-recenseador-publicado-27-279-vagas-confira",edital:"https://cdn.direcaoconcursos.com.br/uploads/2026/11/970d5a1a-6206-4411-85b1-201a3117ea54-1.pdf"},
+{id:"ms-temp",add:"2026-11-16",orgao:"Ministério da Saúde (temporários)",esfera:"Federal",cidade:"Brasília e outras 6 capitais",cargo:"Técnico Administrativo (28), Analista de Requisitos Processuais, Normativos, Econômicos, Financeiros e Políticas de Saúde (218), Analista de Dados (12), Analista em Edificações (8), Analista em Equipamentos (18), Gestor (16)",nivel:["Superior"],qa:"parcial",areas:["farmacia","servico-social"],
+ formacao:"Técnico Administrativo: superior em qualquer área. Analista de Requisitos e Gestor: Administração, Contabilidade, Economia, Gestão Pública, Direito ou curso da área da Saúde (Farmácia e Serviço Social entram aqui). Demais: formação específica.",salario:"R$ 4.740,51 (Técnico) a R$ 10.354,29 (Gestor) + R$ 1.192 de auxílio-alimentação",sal:10354,vagas:"300 imediatas + 459 cadastro reserva",
+ ini:"2026-11-12",fim:"2026-12-14",prova:"17/01/2027 (tarde), objetiva + títulos",taxa:"R$ 60",isencao:"CadÚnico (baixa renda), renda familiar até meio salário mínimo por pessoa e doador de medula óssea. Pedido de 12 a 16/11; documentos até 17/11.",ie:"2026-11-12",ifm:"2026-11-16",
+ banca:"Instituto Avalia",local:"Belém, Belo Horizonte, Brasília, Curitiba, Goiânia, Recife e São Paulo",lotacao:"As mesmas 7 capitais, com a maior parte no DF",ufs:["DF","SP","MG","OUT"],
+ conc:"Sem dado.",selo:"temp",
+ aval:"Contrato temporário de 1 ano (prorrogável), 100% presencial. Técnico Administrativo aceita qualquer graduação e quem é de Farmácia ou Serviço Social pode tentar Analista de Requisitos (218 vagas) ou Gestor. O pedido de isenção fecha hoje, 16/11.",
+ fonte:"https://blog.grancursosonline.com.br/concurso-ministerio-da-saude-temporarios-edital-publicado-2026/",edital:"https://blog-static.infra.grancursosonline.com.br/wp-content/uploads/2026/11/12105412/Edital-Ministerio-da-Saude-Temporarios-2026.pdf"},
+{id:"ghc",add:"2026-11-16",orgao:"GHC (Grupo Hospitalar Conceição)",esfera:"Federal",cidade:"Porto Alegre",cargo:"Cadastro reserva em 52 cargos: Técnico em Educação (Pedagogia), Administrador, Analista de Gestão Hospitalar, Enfermeiro, Biólogo/Biomédico, Técnico de Enfermagem, Auxiliar de Higienização, Vigia, médicos e outros (CLT)",nivel:["Fundamental","Médio","Superior"],qa:"nao",areas:["pedagogia"],
+ formacao:"Específica por cargo, com registro no conselho do RS quando houver. Técnico em Educação: Pedagogia.",salario:"R$ 2.010,60 a R$ 12.974,40 (Técnico em Educação R$ 11.021,40)",sal:12974,vagas:"Só cadastro reserva",
+ ini:"2026-11-05",fim:"2026-12-04",prova:"10/01/2027 (data provável)",taxa:"R$ 19,90 (fundamental) / R$ 109,09 (técnico) / R$ 146,46 (superior)",isencao:"CadÚnico com renda por pessoa até meio salário mínimo e doador de medula óssea. Pedido foi de 9 a 10/11.",ie:"2026-11-09",ifm:"2026-11-10",
+ banca:"Fundatec",local:"Porto Alegre (RS) e região",lotacao:"Porto Alegre e unidades do GHC",ufs:["OUT"],
+ conc:"Sem dado.",selo:"",
+ aval:"Estatal federal da saúde com salário alto pra Pedagogia (Técnico em Educação, R$ 11 mil). Contras: é só cadastro reserva, CLT, e prova e lotação ficam em Porto Alegre.",
+ fonte:"https://blog.grancursosonline.com.br/concurso-ghc-edital-publicado-novembro-2026/",edital:"https://blog-static.infra.grancursosonline.com.br/wp-content/uploads/2026/11/05021427/concurso-ghc-edital-publicado-2026.pdf"},
+{id:"crp05",add:"2026-11-16",orgao:"CRP-05 (Conselho Regional de Psicologia do RJ)",esfera:"Federal",cidade:"Rio de Janeiro e subsedes",cargo:"Agente Administrativo (11), Técnico Administrativo de nível superior (5), Jornalista (1), Psicólogo (18), Contador (1), Técnico de TI (1)",nivel:["Médio","Superior"],qa:"nao",areas:["adm","comunicacao"],tit:"sim",
+ formacao:"Varia por cargo (a matéria não detalha os requisitos de cada um).",salario:"R$ 3.077,42 a R$ 7.313,35 (a matéria não traz o valor de cada cargo)",sal:7313,vagas:"37 + cadastro reserva",
+ ini:"2026-11-16",fim:"2026-12-17",prova:"28/02/2027 (objetiva e discursiva); títulos só pra nível superior",taxa:"R$ 99 (médio) / R$ 140 (superior)",isencao:"CadÚnico (baixa renda) e doador de medula óssea. Pedido de 16/11 (16h) a 18/11 (16h).",ie:"2026-11-16",ifm:"2026-11-18",
+ banca:"FGV",local:"Rio de Janeiro, Petrópolis, Campos dos Goytacazes e Volta Redonda",lotacao:"Sede no Rio e subsedes no estado",ufs:["RJ"],
+ conc:"Sem dado.",selo:"",
+ aval:"Bom pra quem é do RJ: 11 vagas de Agente Administrativo e 1 de Jornalista, com prova também no interior. Contras: banca FGV (difícil) e a matéria não diz quanto paga cada cargo; conferir no edital.",
+ fonte:"https://www.pciconcursos.com.br/noticias/crp-05-rj-abre-concurso-publico-com-salarios-de-ate-7313",edital:""},
 /* ===================== SP ESTADUAL ===================== */
 {id:"sefaz-sp",orgao:"Sefaz SP",esfera:"Estadual",cidade:"São Paulo",cargo:"Analista em Planejamento, Orçamento e Finanças Públicas (APOFP): Orçamento e Finanças, Contabilidade Pública, Ciência de Dados/TI",nivel:["Superior"],qa:"sim",areas:[],
  formacao:"Superior completo em qualquer área.",salario:"R$ 11.359,50 (com prêmio máximo)",sal:11359,vagas:"60 imediatas",
@@ -338,7 +359,27 @@ const D = [
  conc:"Segundo edital de soldado em 2026 (o primeiro, de junho, também teve 2.000 vagas).",selo:"",
  aval:"Salário bom pra nível médio e muitas vagas, mas tem limite de 30 anos, exige CNH, teste físico e formação militar. O pedido de isenção ou redução fecha já em 11/11.",
  fonte:"https://blog.grancursosonline.com.br/concurso-pm-sp-edital-publicado-2-2026/",edital:"https://blog-static.infra.grancursosonline.com.br/wp-content/uploads/2026/11/05090948/edital-pm-sp-soldado-2-2026.pdf"},
-
+{id:"sp-aguas",add:"2026-11-16",orgao:"SP Águas (agência reguladora de recursos hídricos)",esfera:"Estadual",cidade:"São Paulo",cargo:"Especialista em Regulação e Fiscalização de Recursos Hídricos (170) e Analista de Suporte à Regulação (20), em várias ênfases (CLT)",nivel:["Superior"],qa:"sim",areas:[],tit:"sim",
+ formacao:"Superior completo em qualquer área, nos dois cargos.",salario:"R$ 10.366 (Analista) e R$ 12.070 (Especialista) + vale-refeição de R$ 55 por dia",sal:12070,vagas:"190 imediatas + cadastro reserva",
+ ini:"2026-11-17",fim:"2026-12-17",prova:"31/01/2027 (objetiva de manhã, discursiva à tarde) + títulos",taxa:"R$ 110",isencao:"Isenção pra doador de sangue (3 doações em 12 meses); redução de 50% pra estudante com renda menor que 2 salários mínimos ou desempregado. Pedido de 17/11 (16h) a 19/11 (18h).",ie:"2026-11-17",ifm:"2026-11-19",
+ banca:"FGV",local:"A divulgar (prevista em 25/01/2027)",lotacao:"Sede na capital ou unidade regional",ufs:["SP"],
+ conc:"Sem dado.",selo:"vale",
+ aval:"Um dos melhores da semana: aceita qualquer graduação, paga mais de R$ 10 mil e tem 190 vagas imediatas. Contras: é CLT, a FGV é banca difícil e o conteúdo específico é de recursos hídricos e regulação. Pedido de isenção ou redução só até 19/11.",
+ fonte:"https://blog.grancursosonline.com.br/concurso-sp-aguas/",edital:"https://blog-static.infra.grancursosonline.com.br/wp-content/uploads/2026/11/10065757/edital-spaguas-sp-2026.pdf"},
+{id:"cetesb",add:"2026-11-16",orgao:"CETESB (Companhia Ambiental de SP)",esfera:"Estadual",cidade:"Estado de SP",cargo:"Técnico Administrativo (17), Técnico Ambiental: Técnico em Química (3), Analista Ambiental (Química, Biologia, Engenharias e outras), Analista Administrativo, Analista de TI, Advogado, Engenheiro Civil (CLT)",nivel:["Médio","Superior"],qa:"nao",areas:["quimica","adm"],
+ formacao:"Técnico Administrativo: ensino médio. Técnico em Química: curso técnico em Química, registro no CRQ e CNH B. Analistas: bacharelado na área + registro no conselho.",salario:"R$ 5.614,38 (técnicos) a R$ 12.023,52 (analistas com adicional de piso)",sal:12023,vagas:"107 imediatas + cadastro reserva",
+ ini:"2026-11-12",fim:"2026-12-14",prova:"21/02/2027",taxa:"R$ 60 (médio e técnico) / R$ 90 (superior)",isencao:"Isenção pra doador de sangue (3 doações em 12 meses); redução de 50% pra estudante com renda menor que 2 salários mínimos ou desempregado. Pedido foi de 12 a 14/11.",ie:"2026-11-12",ifm:"2026-11-14",
+ banca:"FCC",local:"São Paulo, Campinas, Santos, Sorocaba, São José dos Campos, Ribeirão Preto, Bauru, Araçatuba, Presidente Prudente e São José do Rio Preto",lotacao:"Estado de SP",ufs:["SP"],
+ conc:"Sem dado.",selo:"",
+ aval:"Rara vaga de Técnico em Química (3), pagando R$ 5,6 mil, e 17 de Técnico Administrativo pra nível médio com o mesmo salário. Contras: é CLT, o Técnico em Química exige CRQ e CNH, e o prazo de isenção já fechou.",
+ fonte:"https://blog.grancursosonline.com.br/concurso-cetesb-edital-publicado-2026/",edital:"https://blog-static.infra.grancursosonline.com.br/wp-content/uploads/2026/11/10092653/edital-cetesb-sp-medio-tecnico-2026-1.pdf"},
+{id:"usp-ped",add:"2026-11-16",orgao:"USP (Escola de Aplicação da FEUSP)",esfera:"Estadual",cidade:"São Paulo",cargo:"Professor de Ensino Fundamental e Médio: Ensino Fundamental Polivalente (CLT)",nivel:["Superior"],qa:"nao",areas:["pedagogia"],
+ formacao:"Licenciatura em Pedagogia.",salario:"R$ 11.778,84 + benefícios",sal:11778,vagas:"2 + as que surgirem na validade",
+ ini:"2026-11-11",fim:"2026-12-02",prova:"13/12/2026 (objetiva e dissertativa) + prática (aula) de 12 a 15/01/2027",taxa:"R$ 250",isencao:"Isenção pra doador de sangue e redução pra estudante de baixa renda ou desempregado, mas o pedido foi de 27 a 29/10 e já fechou.",ifm:"2026-10-29",
+ banca:"Fuvest",local:"São Paulo, Ribeirão Preto e Pirassununga (prática só em SP)",lotacao:"Escola de Aplicação, Cidade Universitária (SP)",ufs:["SP"],
+ conc:"Sem dado.",selo:"",
+ aval:"Salário excelente pra Pedagogia, numa escola de referência. Contras: só 2 vagas, taxa de R$ 250, prova em menos de um mês e prova prática de aula.",
+ fonte:"https://blog.grancursosonline.com.br/concurso-usp-professor-edital-publicado-2026/",edital:"https://blog-static.infra.grancursosonline.com.br/wp-content/uploads/2026/11/12113629/Edital-38-2026-USP.pdf"},
 /* ===================== RJ ESTADUAL ===================== */
 {id:"cbmerj",orgao:"Corpo de Bombeiros RJ",esfera:"Estadual",cidade:"Rio de Janeiro",cargo:"1º Tenente Temporário: Médico, Dentista, Fonoaudiólogo, Psicólogo, Nutricionista, Fisioterapeuta",nivel:["Superior"],qa:"nao",areas:[],tit:"sim",
  formacao:"Formação na área com registro no conselho. Idade máxima de 35 anos.",salario:"R$ 10.466,77 (formação) / R$ 12.279,71",sal:12279,vagas:"192 (120 na capital)",
@@ -444,10 +485,10 @@ const D = [
 {id:"gdf-plan",add:"2026-11-02",orgao:"GDF (Planejamento e Infraestrutura)",esfera:"Estadual",cidade:"Brasília",cargo:"Analista e Técnico de Planejamento e Infraestrutura",nivel:["Médio","Superior"],qa:"nao",areas:[],
  formacao:"Técnico: nível médio. Analista: superior (especialidades no edital).",salario:"R$ 4.485 a R$ 12.040,73",sal:12040,vagas:"217 + cadastro reserva",
  ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
- banca:"Instituto Consulplan",local:"Brasília",lotacao:"Brasília/DF",ufs:["DF"],
+ banca:"Instituto Consulpam (contratado em 2023)",local:"Brasília",lotacao:"Brasília/DF",ufs:["DF"],
  conc:"Sem dado.",selo:"",
- aval:"Banca definida e edital esperado em breve. Tem vaga de nível médio com salário acima de R$ 4 mil. As especialidades ainda não foram detalhadas.",
- fonte:"https://blog.grancursosonline.com.br/concursos-distrito-federal-df/",edital:""},
+ aval:"Atenção: o concurso está suspenso desde 18/11/2025 (publicado no DODF), sem data de retomada, segundo Gran e Estratégia. A lista geral do Gran ainda fala em edital em breve, mas não há sinal oficial disso. Fica na base só pra acompanhar se for retomado.",
+ fonte:"https://blog.grancursosonline.com.br/concurso-planejamento-e-infraestrutura-df/",edital:""},
 {id:"sefaz-df",add:"2026-11-02",orgao:"Sefaz DF",esfera:"Estadual",cidade:"Brasília",cargo:"Auditor Fiscal da Receita do DF",nivel:["Superior"],qa:"nao",areas:[],
  formacao:"Superior (requisito exato sai no edital).",salario:"Inicial de R$ 19.085,56 (Folha) ou R$ 23.597,07 (Estratégia e Gran)",sal:23597,vagas:"265 (115 imediatas + 150 cadastro reserva)",
  ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
@@ -462,7 +503,13 @@ const D = [
  conc:"Sem dado.",selo:"",
  aval:"Banca contratada e edital pode sair a qualquer hora. Bate com Farmácia, Serviço Social e Comunicação, e o cadastro reserva é enorme. Contra: prova Cebraspe e as especialidades ainda não foram confirmadas oficialmente.",
  fonte:"https://folha.qconcursos.com/n/concurso-ses-df-banca-contratada-2026",edital:""},
-
+{id:"pcdf-pericia",add:"2026-11-16",orgao:"Polícia Civil DF (Perícia)",esfera:"Estadual",cidade:"Brasília",cargo:"Perito Criminal, Perito Médico-Legista e Papiloscopista",nivel:["Superior"],qa:"nao",areas:[],
+ formacao:"Superior (Medicina pra médico-legista; demais conforme o edital).",salario:"R$ 11.085,72 a R$ 21.449,24",sal:21449,vagas:"315",
+ ini:"",fim:"",prova:"A definir",taxa:"A definir",isencao:"Sai no edital.",
+ banca:"Em escolha (cinco instituições interessadas; a Folha cita o Cebraspe, sem confirmação)",local:"Brasília",lotacao:"Distrito Federal",ufs:["DF"],
+ conc:"Sem dado.",selo:"vale",
+ aval:"Autorizado, com muitas vagas e salário alto. Perito Criminal costuma ter especialidades por formação, então vale conferir no edital se alguma bate com a sua. Contra: banca ainda não definida, então o edital deve demorar.",
+ fonte:"https://folha.qconcursos.com/n/concursos-distrito-federal",edital:""},
 /* ===================== MUNICIPAIS: SP ===================== */
 {id:"iprem",orgao:"Iprem (Prefeitura de São Paulo)",esfera:"Municipal",cidade:"São Paulo",cargo:"APDO: Ciências Contábeis",nivel:["Superior"],qa:"nao",areas:[],
  formacao:"Ciências Contábeis.",salario:"R$ 10.361,89",sal:10361,vagas:"9",
@@ -557,12 +604,12 @@ const D = [
  conc:"Sem dado.",selo:"",
  aval:"Autorizado, com vaga específica de Jornalista na Grande SP e salário bom pra área. Ainda sem banca.",
  fonte:"https://concursos.estrategia.com/portal/concursos-comunicacao-social/",edital:""},
-{id:"jandira",add:"2026-11-09",orgao:"Prefeitura de Jandira",esfera:"Municipal",cidade:"Jandira",cargo:"Auxiliar Administrativo (125), Assistente Social (19), Analista Administrativo (6), Auxiliar de Comunicação e Eventos (1), Orientador Social, Psicólogo, Nutricionista, Agente de Trânsito, Motorista, Arquiteto, Engenheiros e outros (há também editais separados de Procurador e médicos)",nivel:["Fundamental","Médio","Superior"],qa:"nao",areas:["adm","servico-social","comunicacao"],
- formacao:"Varia por cargo. Auxiliar Administrativo: médio + informática. Analista Administrativo: Administração, Contabilidade, Economia, Direito, RH ou Gestão Pública. Assistente Social: Serviço Social + CRESS.",salario:"R$ 1.621 a R$ 6.812,14 (Auxiliar Administrativo R$ 1.793,60; Assistente Social R$ 4.146,50 + 20% de insalubridade)",sal:6812,vagas:"Mais de 300 neste edital + cadastro reserva",
+{id:"jandira",add:"2026-11-09",orgao:"Prefeitura de Jandira",esfera:"Municipal",cidade:"Jandira",cargo:"Edital geral: Auxiliar Administrativo (125), Assistente Social (19), Analista Administrativo (6), Auxiliar de Comunicação e Eventos (1), Orientador Social, Psicólogo e outros. Edital da educação: PEB I (175), Monitor (200), Pedagogo (2), Secretário Escolar (10) e outros professores. Edital da saúde: Farmacêutico (2), Enfermeiro e médicos. Mais um edital jurídico",nivel:["Fundamental","Médio","Superior"],qa:"nao",areas:["adm","servico-social","comunicacao","pedagogia","farmacia"],
+ formacao:"Varia por cargo. Auxiliar Administrativo: médio + informática. Analista Administrativo: Administração, Contabilidade, Economia, Direito, RH ou Gestão Pública. Assistente Social: Serviço Social + CRESS.",salario:"R$ 1.621 a R$ 12.213,03 somando os editais; no edital geral até R$ 6.812,14 (Auxiliar Administrativo R$ 1.793,60; Assistente Social R$ 4.146,50 + 20% de insalubridade)",sal:12213,vagas:"1.380 somando os 4 editais (o PCI fala em 1.072) + cadastro reserva",
  ini:"2026-11-16",fim:"2027-01-04",prova:"21/02/2027 (fundamental e superior) e 28/02/2027 (médio)",taxa:"R$ 67 (fundamental) / R$ 80 (médio) / R$ 115 (superior)",isencao:"Só pra quem comprovar 2 doações de sangue nos 12 meses antes da inscrição.",ie:"2026-11-16",ifm:"2026-11-17",lido:true,
  banca:"Vunesp",local:"Jandira",lotacao:"Jandira (Grande SP, região de Barueri)",ufs:["SP"],
  conc:"2023 (Indepac): 78 vagas imediatas.",selo:"",
- aval:"Muita vaga na Grande SP: 125 de Auxiliar Administrativo e 19 de Assistente Social, com salário razoável pra Serviço Social. Contra: o administrativo paga pouco (R$ 1,8 mil) e a isenção é só pra doador de sangue, com pedido de 2 dias.",
+ aval:"Muita vaga na Grande SP: 125 de Auxiliar Administrativo, 19 de Assistente Social, 175 de PEB I e ainda 2 de Pedagogo e 2 de Farmacêutico nos editais da educação e da saúde (todos com inscrição no mesmo período). Contra: o administrativo paga pouco (R$ 1,8 mil) e a isenção é só pra doador de sangue, com pedido até 17/11. Ache e PCI divergem no total de vagas.",
  fonte:"https://concursos.estrategia.com/portal/concurso-jandira-sp-edital-publicado/",edital:"https://dhg1h5j42swfq.cloudfront.net/2026/11/06143213/edital-concurso-prefeitura-jandira-01-2026-estrategia-concursos.pdf"},
 {id:"guaratingueta",add:"2026-11-09",orgao:"Prefeitura de Guaratinguetá",esfera:"Municipal",cidade:"Guaratinguetá",cargo:"Jornalista, Assistente Social, Escriturário, Auxiliar Jurídico, Agente de Trânsito, Fiscal de Posturas, Auxiliar em Saúde Bucal, Técnicos (Enfermagem e Segurança do Trabalho), Arquiteto, Contador, Procurador, Médicos, Professores e outros (CLT)",nivel:["Fundamental","Médio","Superior"],qa:"nao",areas:["comunicacao","servico-social","adm"],
  formacao:"Varia por cargo.",salario:"Até R$ 18.540,71 + cartão-alimentação de R$ 850",sal:18540,vagas:"106 imediatas + cadastro reserva",
@@ -627,7 +674,13 @@ const D = [
  conc:"Sem dado.",selo:"",
  aval:"Lei autorizou quase 2 mil vagas, com Técnico de Aparelho Gessado, Farmacêutico, Assistente Social e 130 de Oficial Administrativo. Contra: ainda não tem banca nem data, e muitos salários devem ser baixos.",
  fonte:"https://folha.qconcursos.com/n/concurso-araruama-rj-lei-autoriza-vagas-2026",edital:""},
-
+{id:"italva",add:"2026-11-16",orgao:"Prefeitura de Italva",esfera:"Municipal",cidade:"Italva",cargo:"Assistente Social, Farmacêutico, Pedagogo, Técnico em Imobilização Ortopédica e outros cargos de saúde, educação, administração e controle",nivel:["Médio","Superior"],qa:"nao",areas:["servico-social","farmacia","pedagogia","imobilizacao"],
+ formacao:"Varia por cargo.",salario:"R$ 2.536,99 a R$ 12.132,37 (Assistente Social e Farmacêutico R$ 6.189,56; Pedagogo R$ 5.374,91; Técnico em Imobilização R$ 3.038,18)",sal:12132,vagas:"137 imediatas + cadastro reserva (1 vaga em cada um dos cargos de interesse)",
+ ini:"2026-11-16",fim:"2026-12-16",prova:"24/01/2027 (objetiva e discursiva)",taxa:"R$ 80 (médio e técnico) / R$ 120 (superior)",isencao:"Só hipossuficiente (Decreto 6.593/2008, com NIS). Pedido de 16 a 17/11, com documentos.",ie:"2026-11-16",ifm:"2026-11-17",
+ banca:"Instituto Ação",local:"Italva",lotacao:"Italva (Noroeste Fluminense)",ufs:["RJ"],
+ conc:"Sem dado.",selo:"",
+ aval:"Bate com quatro áreas da família de uma vez, com salário de R$ 6,2 mil pra Serviço Social e Farmácia (30h). Contras: cidade pequena e longe da capital, e é 1 vaga por cargo. O pedido de isenção fecha amanhã, 17/11.",
+ fonte:"https://folha.qconcursos.com/n/prefeitura-municipal-de-italva-rj-abre-concurso-com-137-vagas-para-niveis-medio-tecnico-e-superior",edital:"https://arquivos.qconcursos.com/f/edital_prefeitura-de-italva-rj_2026.pdf"},
 /* ===================== MUNICIPAIS: MG ===================== */
 {id:"smed-bh",orgao:"Prefeitura de BH (Educação)",esfera:"Municipal",cidade:"Belo Horizonte",cargo:"Professor Municipal: 1º e 2º ciclos, Matemática, Educação Física, Geografia, Inglês",nivel:["Superior"],qa:"nao",areas:["pedagogia"],
  formacao:"Licenciatura na disciplina, ou Pedagogia/Normal Superior. Precisa ter feito a Prova Nacional Docente 2026.",salario:"R$ 3.660,96",sal:3660,vagas:"112",
@@ -725,7 +778,35 @@ const D = [
  banca:"Própria (Prefeitura)",local:"Ouro Fino (inscrição presencial na Av. Cyro Gonçalves, 173)",lotacao:"Ouro Fino (sul de MG)",ufs:["MG"],
  conc:"Sem dado.",selo:"ruim",
  aval:"Uma vaga só, com inscrição presencial. A matéria não diz se é temporário (validade de 2 anos ou até sair concurso). Só pra quem é do sul de MG.",
- fonte:"https://folha.qconcursos.com/n/prefeitura-municipal-de-ouro-fino-mg-abre-processo-seletivo-para-assistente-social",edital:""}
+ fonte:"https://folha.qconcursos.com/n/prefeitura-municipal-de-ouro-fino-mg-abre-processo-seletivo-para-assistente-social",edital:""},
+{id:"confins",add:"2026-11-16",orgao:"Prefeitura de Confins (Educação)",esfera:"Municipal",cidade:"Confins",cargo:"Processo seletivo: PEB I (33), Auxiliar de Educação Básica (53), Pedagogo (3), PEB II e IV, Secretário Escolar, Auxiliar de Secretaria, Serventes e outros; Assistente Social e Psicopedagogo só cadastro reserva",nivel:["Fundamental","Médio","Superior"],qa:"nao",areas:["pedagogia","servico-social","adm"],tit:"sim",
+ formacao:"Varia por cargo. Pedagogo e PEB I: Pedagogia (ou Normal Superior no PEB I).",salario:"R$ 1.628,10 a R$ 3.812,56 (Pedagogo R$ 3.642,60 por 25h)",sal:3812,vagas:"171 + cadastro reserva",
+ ini:"2026-11-12",fim:"2026-12-03",prova:"Sem prova escrita: só análise de títulos e experiência",taxa:"R$ 40 a R$ 80",isencao:"CadÚnico com NIS. Pedido só no dia 12/11 (já fechou).",ie:"2026-11-12",ifm:"2026-11-12",
+ banca:"IBGP",local:"Sem prova presencial (documentos enviados online)",lotacao:"Confins (Grande BH)",ufs:["MG"],
+ conc:"Sem dado.",selo:"",
+ aval:"Sem prova: conta formação e experiência, bom pra quem já tem Pedagogia e tempo de sala. Validade de 1 ano; a matéria não diz se o contrato é temporário. Contra: salários baixos.",
+ fonte:"https://www.acheconcursos.com.br/concursos-minas-gerais/edital-confins-mg-2026-abre-171-vagas-na-educacao-94569",edital:"https://www.acheconcursos.com.br/imagens/anexo/65187/edital-processo-seletivo-prefeitura-de-confins-mg-03-2026.pdf"},
+{id:"claudio",add:"2026-11-16",orgao:"Prefeitura de Cláudio (Educação)",esfera:"Municipal",cidade:"Cláudio",cargo:"Pedagogo (5), Professor PI (15) e Professor PII de Arte, Educação Física, Ensino Religioso, Geografia, Inglês, Português e Matemática",nivel:["Superior"],qa:"nao",areas:["pedagogia"],tit:"sim",
+ formacao:"Nível superior na área (licenciatura ou Pedagogia). Usa a nota da Prova Nacional Docente.",salario:"R$ 3.324,28 a R$ 4.748,99 (ou R$ 30,76 por hora-aula)",sal:4748,vagas:"35",
+ ini:"2026-12-14",fim:"2027-01-04",prova:"Nota da Prova Nacional Docente + títulos",taxa:"R$ 65",isencao:"A matéria não informa.",
+ banca:"IBGP",local:"Sem prova própria",lotacao:"Cláudio (centro-oeste de MG)",ufs:["MG"],
+ conc:"Sem dado.",selo:"",
+ aval:"Só serve pra quem fez a Prova Nacional Docente. 5 vagas de Pedagogo numa cidade pequena do centro-oeste mineiro.",
+ fonte:"https://www.pciconcursos.com.br/noticias/prefeitura-de-claudio-mg-abre-concurso-publico-para-cargos-de-nivel-superior-na-educacao",edital:"https://www.ibgpconcursos.com.br"},
+{id:"luislandia",add:"2026-11-16",orgao:"Prefeitura de Luislândia",esfera:"Municipal",cidade:"Luislândia",cargo:"Agente Administrativo (10), Pedagogo (1), Assistente Social (1), Assistente Técnico Administrativo (1), Farmacêutico (cadastro reserva), professores e outros",nivel:["Fundamental","Médio","Superior"],qa:"nao",areas:["adm","pedagogia","servico-social","farmacia"],tit:"sim",
+ formacao:"Varia por cargo.",salario:"R$ 1.621 a R$ 10.000 (a matéria não traz o valor de cada cargo)",sal:10000,vagas:"88",
+ ini:"2026-12-10",fim:"2027-01-06",prova:"31/01/2027 (objetiva) + títulos no nível superior",taxa:"R$ 65 a R$ 100",isencao:"Pedido de 07 a 09/12 (a matéria não diz quem tem direito).",ie:"2026-12-07",ifm:"2026-12-09",
+ banca:"COTEC/Fadenor (pelo site de inscrição)",local:"Luislândia",lotacao:"Luislândia (norte de MG)",ufs:["MG"],
+ conc:"Sem dado.",selo:"ruim",
+ aval:"Cidade pequena do norte de MG, com 10 vagas de Agente Administrativo e 1 de Pedagogo e de Assistente Social. Contra: longe de tudo e sem salário por cargo na matéria.",
+ fonte:"https://www.pciconcursos.com.br/noticias/prefeitura-de-luislandia-mg-abre-concurso-publico-com-vagas-em-diversas-areas",edital:""},
+{id:"lagoa-santa",add:"2026-11-16",orgao:"Prefeitura de Lagoa Santa",esfera:"Municipal",cidade:"Lagoa Santa",cargo:"Agente Administrativo (29), Farmacêutico (8), Fiscal de Vigilância Sanitária, Auditor Fiscal, Contador, Engenheiros, Terapeuta Ocupacional, dentistas, médicos e outros",nivel:["Fundamental","Médio","Superior"],qa:"nao",areas:["adm","farmacia"],tit:"sim",
+ formacao:"Varia por cargo.",salario:"R$ 2.220,57 a R$ 8.860,79",sal:8860,vagas:"79 + cadastro reserva",
+ ini:"2026-12-16",fim:"2027-01-18",prova:"21/02/2027 (objetiva) + títulos no nível superior",taxa:"R$ 50 (fundamental) / R$ 65 (médio e técnico) / R$ 100 (superior)",isencao:"A matéria não informa.",
+ banca:"IBGP (inscrição no site do IBGP)",local:"Lagoa Santa",lotacao:"Lagoa Santa (Grande BH)",ufs:["MG"],
+ conc:"Sem dado.",selo:"",
+ aval:"Grande BH, com 29 vagas de Agente Administrativo e 8 de Farmacêutico, bom volume pra cidade. Inscrição só em dezembro. Contra: a matéria não diz o salário de cada cargo.",
+ fonte:"https://www.pciconcursos.com.br/noticias/prefeitura-de-lagoa-santa-mg-abre-concurso-publico-com-salarios-de-ate-8860",edital:"https://www.ibgpconcursos.com.br"}
 ];
 
 const SELO = {"vale":"Vale a pena","ruim":"Pouco atrativo","temp":"Temporário"};
